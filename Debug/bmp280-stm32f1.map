@@ -76,9 +76,9 @@ Discarded input sections
                 0x00000000       0x18 ./Core/Src/BMP280.o
  .debug_macro   0x00000000       0x1a ./Core/Src/BMP280.o
  .debug_macro   0x00000000      0xaa8 ./Core/Src/BMP280.o
- .debug_macro   0x00000000       0xe2 ./Core/Src/BMP280.o
+ .debug_macro   0x00000000      0x1a8 ./Core/Src/BMP280.o
  .debug_line    0x00000000       0x4d ./Core/Src/BMP280.o
- .debug_str     0x00000000     0x312b ./Core/Src/BMP280.o
+ .debug_str     0x00000000     0x3668 ./Core/Src/BMP280.o
  .comment       0x00000000       0x44 ./Core/Src/BMP280.o
  .ARM.attributes
                 0x00000000       0x2d ./Core/Src/BMP280.o
