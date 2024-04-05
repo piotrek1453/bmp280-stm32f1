@@ -18,9 +18,9 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "cmsis_os.h"
 #include "gpio.h"
 #include "i2c.h"
-#include "stdio.h"
 #include "usart.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -51,8 +51,9 @@
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
-int __io_putchar(int ch);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -92,16 +93,23 @@ int main(void) {
   MX_I2C1_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  printf("System initializing\r\n");
   /* USER CODE END 2 */
+
+  /* Init scheduler */
+  osKernelInitialize();
+
+  /* Call init function for freertos objects (in cmsis_os2.c) */
+  MX_FREERTOS_Init();
+
+  /* Start scheduler */
+  osKernelStart();
+
+  /* We should never get here as control is now taken by the scheduler */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1) {
-    HAL_GPIO_TogglePin(ON_BOARD_LED_1_GPIO_Port, ON_BOARD_LED_1_Pin);
-    HAL_GPIO_TogglePin(ON_BOARD_LED_2_GPIO_Port, ON_BOARD_LED_2_Pin);
-    printf("test\r\n");
-    HAL_Delay(1000);
+  while (true) {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -146,6 +154,11 @@ void SystemClock_Config(void) {
 }
 
 /* USER CODE BEGIN 4 */
+
+/**
+ * @brief Executed in free time available to core
+ *
+ */
 
 /**
  * @brief putchar() override - redirect printf to USART2
