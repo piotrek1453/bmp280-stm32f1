@@ -47,20 +47,23 @@
 /* USER CODE BEGIN Variables */
 osThreadId_t vStatusTaskHandle;
 /* USER CODE END Variables */
-/* Definitions for defaultTask */
-osThreadId_t defaultTaskHandle;
-const osThreadAttr_t defaultTask_attributes = {
-    .name = "defaultTask",
+/* Definitions for statusTask */
+osThreadId_t statusTaskHandle;
+const osThreadAttr_t statusTask_attributes = {
+    .name = "statusTask",
     .stack_size = 128 * 4,
-    .priority = (osPriority_t)osPriorityNormal,
+    .priority = (osPriority_t)osPriorityLow,
 };
+/* Definitions for USART2TxMutex */
+osMutexId_t USART2TxMutexHandle;
+const osMutexAttr_t USART2TxMutex_attributes = {.name = "USART2TxMutex"};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
-void vStatusTask(void *pvParameters);
+
 /* USER CODE END FunctionPrototypes */
 
-void StartDefaultTask(void *argument);
+void vStatusTask(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -83,15 +86,6 @@ void vApplicationIdleHook(void) {
   // printf("idle task\r\n");
   //  vTaskDelay(pdMS_TO_TICKS(1000));
 }
-
-void vStatusTask(void *pvParameters) {
-  while (true) {
-    HAL_GPIO_TogglePin(ON_BOARD_LED_1_GPIO_Port, ON_BOARD_LED_1_Pin);
-    HAL_GPIO_TogglePin(ON_BOARD_LED_2_GPIO_Port, ON_BOARD_LED_2_Pin);
-    printf("test\r\n");
-    vTaskDelay(pdMS_TO_TICKS(1000));
-  }
-}
 /* USER CODE END 2 */
 
 /**
@@ -103,6 +97,9 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
 
   /* USER CODE END Init */
+  /* Create the mutex(es) */
+  /* creation of USART2TxMutex */
+  USART2TxMutexHandle = osMutexNew(&USART2TxMutex_attributes);
 
   /* USER CODE BEGIN RTOS_MUTEX */
   /* add mutexes, ... */
@@ -120,14 +117,39 @@ void MX_FREERTOS_Init(void) {
   /* add queues, ... */
   /* USER CODE END RTOS_QUEUES */
 
+  /* Create the thread(s) */
+  /* creation of statusTask */
+  statusTaskHandle = osThreadNew(vStatusTask, NULL, &statusTask_attributes);
+
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
-  vStatusTaskHandle = osThreadNew(vStatusTask, NULL, NULL);
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */
   /* add events, ... */
   /* USER CODE END RTOS_EVENTS */
+}
+
+/* USER CODE BEGIN Header_vStatusTask */
+/**
+ * @brief  Function implementing the statusTask thread.
+ * @param  argument: Not used
+ * @retval None
+ */
+/* USER CODE END Header_vStatusTask */
+void vStatusTask(void *argument) {
+  /* USER CODE BEGIN vStatusTask */
+  /* Infinite loop */
+  while (true) {
+    HAL_GPIO_TogglePin(ON_BOARD_LED_1_GPIO_Port, ON_BOARD_LED_1_Pin);
+    HAL_GPIO_TogglePin(ON_BOARD_LED_2_GPIO_Port, ON_BOARD_LED_2_Pin);
+    if (osMutexAcquire(USART2TxMutexHandle, osWaitForever) == osOK) {
+      printf("test\r\n");
+      osMutexRelease(USART2TxMutexHandle);
+    }
+    vTaskDelay(pdMS_TO_TICKS(1000));
+  }
+  /* USER CODE END vStatusTask */
 }
 
 /* Private application code --------------------------------------------------*/
