@@ -9,23 +9,79 @@
 #pragma once
 
 #include "stm32f1xx_hal.h"
+#include <stdbool.h>
+
+/**
+ * @brief Initialize sensor with chosen settings
+ * @param osrs_t Temperature oversampling setting
+ * @param osrs_p Pressure oversampling setting
+ * @param acq_mode Acquisition mode setting
+ * @param t_sb Standby time setting
+ * @param filter_tc Sensor IIR Filter time constant setting
+ * @param i2c_handle Desired MCU I2C peripheral for communication with sensor
+ * @return Configuration status\n
+ * false == unsuccessful\n
+ * true == successful
+ *
+ */
+bool BMP280_InitI2C(uint8_t osrs_t, uint8_t osrs_p, uint8_t acq_mode,
+                    uint8_t t_sb, uint8_t filter_tc,
+                    I2C_HandleTypeDef i2c_handle);
+
+/**
+ * @brief Read sensor calibration parameters over I2C
+ * @param i2c_handle Desired MCU I2C peripheral for communication with sensor
+ * @param device_address I2C device address
+ *
+ */
+void BMP280_CalibrationConstantsRead_I2C(I2C_HandleTypeDef i2c_handle,
+                                         uint8_t device_address);
+
+/**
+ * @brief Wake sensor over I2C - used when measuring in forced mode
+ * @param i2c_handle Desired MCU I2C peripheral for communication with sensor\n
+ * @param device_address I2C device address\n
+ * BMP280_DEVICE_ADDRESS_GND = 0x76\n
+ * BMP280_DEVICE_ADDRESS_VDDIO = 0x77
+ *
+ */
+void BMP280_Wake_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address);
+
+/**
+ * @brief Measure temperature and pressure over I2C
+ * @param i2c_handle Desired MCU I2C peripheral for communication with sensor
+ * @param device_address I2C device address\n
+ * BMP280_DEVICE_ADDRESS_GND = 0x76\n
+ * BMP280_DEVICE_ADDRESS_VDDIO = 0x77
+ * @return Measurement values
+ *
+ */
+float BMP280_Measure_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address);
+
+/**
+ * \name Sensor I2C addresses
+ */
+//@{
+#define BMP280_DEVICE_ADDRESS_GND 0x76   /**< Used when SDO pulled down */
+#define BMP280_DEVICE_ADDRESS_VDDIO 0x77 /**< Used when SDO pulled up */
+//@}
 
 /**
  *  \name Raw temperature data registers addresses, read only
  */
 //@{
-#define BMP280_REG_TEMP_XLSB 0xFC /**< LSB data chunk */
-#define BMP280_REG_TEMP_LSB 0xFB  /**< middle data chunk */
-#define BMP280_REG_TEMP_MSB 0xFA  /**< MSB data chunk */
+#define BMP280_REG_TEMP_XLSB 0xFC /**< LSB temperature data chunk */
+#define BMP280_REG_TEMP_LSB 0xFB  /**< Middle temperature data chunk */
+#define BMP280_REG_TEMP_MSB 0xFA  /**< MSB temperature data chunk */
 //@}
 
 /**
  *  \name Raw pressure data registers addresses, read only
  */
 //@{
-#define BMP280_REG_PRESS_XLSB 0xF9 /**< LSB data chunk */
-#define BMP280_REG_PRESS_LSB 0xF8  /**< middle data chunk */
-#define BMP280_REG_PRESS_MSB 0xF7  /**< MSB data chunk */
+#define BMP280_REG_PRESS_XLSB 0xF9 /**< LSB pressure data chunk */
+#define BMP280_REG_PRESS_LSB 0xF8  /**< Middle pressure data chunk */
+#define BMP280_REG_PRESS_MSB 0xF7  /**< MSB pressure data chunk */
 //@}
 
 /**
@@ -44,12 +100,12 @@
 /**
  * \name Reset register address, write only
  */
-#define BMP280_REG_RESET 0xE0 /** Device reset register */
+#define BMP280_REG_RESET 0xE0 /**< Device reset register */
 
 /**
  * \name Device ID register address, read only
  */
-#define BMP280_REG_ID 0xD0 /** DEVID register */
+#define BMP280_REG_ID 0xD0 /**< DEVID register */
 
 /**
  * \name Calibration registers addresses, read only
@@ -82,15 +138,24 @@
 #define BMP280_REG_CALIB00 0x88 /**< Calibration register 0 */
 
 /**
- * \name Valid register values
+ * \name Valid ID register value
  */
 #define BMP280_VAL_DEVID 0x58 /**< Device ID */
 
+/**
+ * \name Valid RESET register value
+ */
 #define BMP280_VAL_RESET 0xB6 /**< Writing to reset register resets device */
 
+/**
+ * \name Valid STATUS register flags masks
+ */
 #define BMP280_VAL_STATUS_MEASURING 1U << 3 /**< Measuring busy flag */
 #define BMP280_VAL_STATUS_IM_UPDATE 1U << 0 /**< NVM copying status flag */
 
+/**
+ * \name Valid CTRL_MEAS register acquisition option values
+ */
 #define BMP280_VAL_CTRL_MEAS_OSRS_T_0 0b00000000  /**< Disabled measurement */
 #define BMP280_VAL_CTRL_MEAS_OSRS_T_1 0b00100000  /**< 1x oversampling */
 #define BMP280_VAL_CTRL_MEAS_OSRS_T_2 0b01000000  /**< 2x oversampling */
@@ -124,5 +189,15 @@
 #define BMP280_VAL_CTRL_CONFIG_FILTER_8 0b00001100  /**< 8x filter */
 #define BMP280_VAL_CTRL_CONFIG_FILTER_16 0b00010000 /**< 16x filter */
 
-#define BMP280_VAL_CTRL_SPI3W_EN 0b00000001 /**< enable SPI 3-wire */
+#define BMP280_VAL_CTRL_SPI3W_EN 0b00000001 /**< Enable SPI 3-wire */
+
+/**
+ * \name MCU specific setting - affects pressure processing formula
+ *
+ */
+//@{
+#define RETURN_64BIT true  /**< for MCU with 64-bit operations support */
+#define RETURN_32BIT false /**< for MCU without 64-bit operations support */
+                           //@}
+
 /* INC_BMP280_H_ */
