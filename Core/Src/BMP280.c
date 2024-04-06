@@ -21,8 +21,9 @@ bool BMP280_InitI2C(uint8_t osrs_t, uint8_t osrs_p, uint8_t acq_mode,
 void BMP280_CalibrationConstantsRead_I2C(I2C_HandleTypeDef i2c_handle,
                                          uint8_t device_address) {
   uint8_t calibrationConstantsRaw[26];
-  HAL_I2C_Mem_Read(&i2c_handle, device_address, BMP280_REG_CALIB00, 1,
-                   calibrationConstantsRaw, 26, HAL_MAX_DELAY);
+
+  HAL_I2C_Mem_Read_DMA(&i2c_handle, device_address, BMP280_REG_CALIB00, 1,
+                       calibrationConstantsRaw, 26);
 
   dig_T1 = calibrationConstantsRaw[0] | calibrationConstantsRaw[1] << 8;
   dig_T2 = calibrationConstantsRaw[2] | calibrationConstantsRaw[3] << 8;
