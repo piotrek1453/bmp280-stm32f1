@@ -54,6 +54,13 @@ const osThreadAttr_t statusTask_attributes = {
     .stack_size = 128 * 4,
     .priority = (osPriority_t)osPriorityLow,
 };
+/* Definitions for ledTask */
+osThreadId_t ledTaskHandle;
+const osThreadAttr_t ledTask_attributes = {
+    .name = "ledTask",
+    .stack_size = 128 * 4,
+    .priority = (osPriority_t)osPriorityLow,
+};
 /* Definitions for USART2TxMutex */
 osMutexId_t USART2TxMutexHandle;
 const osMutexAttr_t USART2TxMutex_attributes = {.name = "USART2TxMutex"};
@@ -64,6 +71,7 @@ const osMutexAttr_t USART2TxMutex_attributes = {.name = "USART2TxMutex"};
 /* USER CODE END FunctionPrototypes */
 
 void vStatusTask(void *argument);
+void vLedTask(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -121,6 +129,9 @@ void MX_FREERTOS_Init(void) {
   /* creation of statusTask */
   statusTaskHandle = osThreadNew(vStatusTask, NULL, &statusTask_attributes);
 
+  /* creation of ledTask */
+  ledTaskHandle = osThreadNew(vLedTask, NULL, &ledTask_attributes);
+
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
@@ -140,16 +151,30 @@ void MX_FREERTOS_Init(void) {
 void vStatusTask(void *argument) {
   /* USER CODE BEGIN vStatusTask */
   /* Infinite loop */
+  while (true && osMutexAcquire(USART2TxMutexHandle, osWaitForever) == osOK) {
+    printf("test\r\n");
+    osMutexRelease(USART2TxMutexHandle);
+    osDelay(1000);
+  }
+  /* USER CODE END vStatusTask */
+}
+
+/* USER CODE BEGIN Header_vLedTask */
+/**
+ * @brief Function implementing the ledTask thread.
+ * @param argument: Not used
+ * @retval None
+ */
+/* USER CODE END Header_vLedTask */
+void vLedTask(void *argument) {
+  /* USER CODE BEGIN vLedTask */
+  /* Infinite loop */
   while (true) {
     HAL_GPIO_TogglePin(ON_BOARD_LED_1_GPIO_Port, ON_BOARD_LED_1_Pin);
     HAL_GPIO_TogglePin(ON_BOARD_LED_2_GPIO_Port, ON_BOARD_LED_2_Pin);
-    if (osMutexAcquire(USART2TxMutexHandle, osWaitForever) == osOK) {
-      printf("test\r\n");
-      osMutexRelease(USART2TxMutexHandle);
-    }
-    vTaskDelay(pdMS_TO_TICKS(1000));
+    osDelay(1000);
   }
-  /* USER CODE END vStatusTask */
+  /* USER CODE END vLedTask */
 }
 
 /* Private application code --------------------------------------------------*/
