@@ -1,4 +1,4 @@
 ../Core/Src/BMP280.c:17:6:BMP280_InitI2C	1
 ../Core/Src/BMP280.c:21:6:BMP280_CalibrationConstantsRead_I2C	1
-../Core/Src/BMP280.c:45:6:BMP280_Wake_I2C	1
-../Core/Src/BMP280.c:47:7:BMP280_Measure_I2C	1
+../Core/Src/BMP280.c:43:6:BMP280_Wake_I2C	1
+../Core/Src/BMP280.c:53:7:BMP280_Measure_I2C	1

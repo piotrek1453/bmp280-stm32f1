@@ -98,6 +98,7 @@ int main(void) {
   /* USER CODE BEGIN 2 */
   printf("System initializing\r\n");
   BMP280_CalibrationConstantsRead_I2C(hi2c1, BMP280_DEVICE_ADDRESS_VDDIO);
+  BMP280_Wake_I2C(hi2c1, BMP280_DEVICE_ADDRESS_VDDIO);
   /* USER CODE END 2 */
 
   /* Init scheduler */

@@ -40,7 +40,15 @@ void BMP280_CalibrationConstantsRead_I2C(I2C_HandleTypeDef i2c_handle,
   dig_P9 = calibrationConstantsRaw[22] | calibrationConstantsRaw[23] << 8;
 }
 
-void BMP280_Wake_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address) {}
+void BMP280_Wake_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address) {
+  uint8_t buffer;
+
+  HAL_I2C_Mem_Read_DMA(&i2c_handle, device_address, BMP280_REG_CTRL_MEAS, 1,
+                       &buffer, 1);
+  buffer |= BMP280_VAL_CTRL_MEAS_MODE_FORCED;
+  HAL_I2C_Mem_Write_DMA(&i2c_handle, device_address, BMP280_REG_CTRL_MEAS, 1,
+                        &buffer, 1);
+}
 
 float BMP280_Measure_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address) {
 }
