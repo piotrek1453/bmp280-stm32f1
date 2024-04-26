@@ -26,7 +26,7 @@
  */
 bool BMP280_InitI2C(uint8_t osrs_t, uint8_t osrs_p, uint8_t acq_mode,
                     uint8_t t_sb, uint8_t filter_tc,
-                    I2C_HandleTypeDef i2c_handle);
+                    I2C_HandleTypeDef i2c_handle, uint8_t device_address);
 
 /**
  * @brief Read sensor calibration parameters over I2C
@@ -62,8 +62,8 @@ float BMP280_Measure_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address);
  * \name Sensor I2C addresses
  */
 //@{
-#define BMP280_DEVICE_ADDRESS_GND 0x76   /**< Used when SDO pulled down */
-#define BMP280_DEVICE_ADDRESS_VDDIO 0x77 /**< Used when SDO pulled up */
+#define BMP280_DEVICE_ADDRESS_GND 0x76 << 1   /**< Used when SDO pulled down */
+#define BMP280_DEVICE_ADDRESS_VDDIO 0x77 << 1 /**< Used when SDO pulled up */
 //@}
 
 /**
