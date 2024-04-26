@@ -17,10 +17,9 @@ int16_t dig_T2, dig_T3, dig_P2, dig_P3, dig_P4, dig_P5, dig_P6, dig_P7, dig_P8,
 void BMP280_CalibrationConstantsRead_I2C(I2C_HandleTypeDef i2c_handle,
                                          uint8_t device_address) {
   uint8_t calibrationConstantsRaw[26];
-  HAL_StatusTypeDef status;
 
-  status = HAL_I2C_Mem_Read(&i2c_handle, device_address, BMP280_REG_CALIB00, 1,
-                            calibrationConstantsRaw, 26, HAL_MAX_DELAY);
+  HAL_I2C_Mem_Read(&i2c_handle, device_address, BMP280_REG_CALIB00, 1,
+                   calibrationConstantsRaw, 26, HAL_MAX_DELAY);
 
   dig_T1 = calibrationConstantsRaw[0] | calibrationConstantsRaw[1] << 8;
   dig_T2 = calibrationConstantsRaw[2] | calibrationConstantsRaw[3] << 8;
@@ -45,33 +44,38 @@ void BMP280_CalibrationConstantsRead_I2C(I2C_HandleTypeDef i2c_handle,
 bool BMP280_InitI2C(uint8_t osrs_t, uint8_t osrs_p, uint8_t acq_mode,
                     uint8_t t_sb, uint8_t filter_tc,
                     I2C_HandleTypeDef i2c_handle, uint8_t device_address) {
-  uint8_t writeBuffer, readBuffer = 0; // Variables used for applying changes to
-                                       // selected bits in device registers */
+  uint8_t writeBuffer, readBuffer; // Variables used for applying changes to
+                                   // selected bits in device registers */
   HAL_StatusTypeDef status;
 
   BMP280_CalibrationConstantsRead_I2C(i2c_handle, device_address);
 
+  // Read device ID
   status = HAL_I2C_Mem_Read(&i2c_handle, device_address, BMP280_REG_ID, 1,
                             &readBuffer, 1, HAL_MAX_DELAY);
+
+  if (status != HAL_OK || readBuffer != 0x58) {
+    return false;
+  }
 
   // Reset the device
   writeBuffer = 0xB6;
   status = HAL_I2C_Mem_Write(&i2c_handle, device_address, BMP280_REG_RESET, 1,
                              &writeBuffer, 1, HAL_MAX_DELAY);
 
-  HAL_Delay(100);
+  if (status != HAL_OK) {
+    return false;
+  }
 
   // Write timing and IIR data to config register
   writeBuffer = (t_sb << 5) | (filter_tc << 2);
   status = HAL_I2C_Mem_Write(&i2c_handle, device_address, BMP280_REG_CONFIG, 1,
                              &writeBuffer, 1, HAL_MAX_DELAY);
 
-  HAL_Delay(100);
-
   status = HAL_I2C_Mem_Read(&i2c_handle, device_address, BMP280_REG_CONFIG, 1,
                             &readBuffer, 1, HAL_MAX_DELAY);
 
-  if (readBuffer != writeBuffer) {
+  if (readBuffer != writeBuffer || status != HAL_OK) {
     return false;
   }
 
@@ -80,12 +84,10 @@ bool BMP280_InitI2C(uint8_t osrs_t, uint8_t osrs_p, uint8_t acq_mode,
   status = HAL_I2C_Mem_Write(&i2c_handle, device_address, BMP280_REG_CTRL_MEAS,
                              1, &writeBuffer, 1, HAL_MAX_DELAY);
 
-  HAL_Delay(100);
-
   status = HAL_I2C_Mem_Read(&i2c_handle, device_address, BMP280_REG_CTRL_MEAS,
                             1, &readBuffer, 1, HAL_MAX_DELAY);
 
-  if (readBuffer != writeBuffer) {
+  if (readBuffer != writeBuffer || status != HAL_OK) {
     return false;
   }
 
@@ -103,4 +105,5 @@ void BMP280_Wake_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address) {
 }
 
 float BMP280_Measure_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address) {
+  return 0.1;
 }
