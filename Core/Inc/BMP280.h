@@ -19,20 +19,23 @@
  * @param t_sb Standby time setting
  * @param filter_tc Sensor IIR Filter time constant setting
  * @param i2c_handle Desired MCU I2C peripheral for communication with sensor
+ * @param device_address I2C device address
  * @return Configuration status\n
  * false == unsuccessful\n
  * true == successful
- *
  */
-bool BMP280_InitI2C(uint8_t osrs_t, uint8_t osrs_p, uint8_t acq_mode,
-                    uint8_t t_sb, uint8_t filter_tc,
-                    I2C_HandleTypeDef i2c_handle, uint8_t device_address);
+bool BMP280_Init_I2C(uint8_t osrs_t,
+                     uint8_t osrs_p,
+                     uint8_t acq_mode,
+                     uint8_t t_sb,
+                     uint8_t filter_tc,
+                     I2C_HandleTypeDef i2c_handle,
+                     uint8_t device_address);
 
 /**
  * @brief Read sensor calibration parameters over I2C
  * @param i2c_handle Desired MCU I2C peripheral for communication with sensor
  * @param device_address I2C device address
- *
  */
 void BMP280_CalibrationConstantsRead_I2C(I2C_HandleTypeDef i2c_handle,
                                          uint8_t device_address);
@@ -43,9 +46,11 @@ void BMP280_CalibrationConstantsRead_I2C(I2C_HandleTypeDef i2c_handle,
  * @param device_address I2C device address\n
  * BMP280_DEVICE_ADDRESS_GND = 0x76\n
  * BMP280_DEVICE_ADDRESS_VDDIO = 0x77
- *
+ * @return Wake status\n
+ * false == unsuccessful\n
+ * true == successful
  */
-void BMP280_Wake_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address);
+bool BMP280_Wake_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address);
 
 /**
  * @brief Measure temperature and pressure over I2C
@@ -54,7 +59,6 @@ void BMP280_Wake_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address);
  * BMP280_DEVICE_ADDRESS_GND = 0x76\n
  * BMP280_DEVICE_ADDRESS_VDDIO = 0x77
  * @return Measurement values
- *
  */
 float BMP280_Measure_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address);
 
@@ -193,7 +197,6 @@ float BMP280_Measure_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address);
 
 /**
  * \name MCU specific setting - affects pressure processing formula
- *
  */
 //@{
 #define RETURN_64BIT true  /**< for MCU with 64-bit operations support */

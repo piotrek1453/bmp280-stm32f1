@@ -1,0 +1,774 @@
+\doxysection{Core/\+Inc/\+BMP280.h File Reference}
+\hypertarget{_b_m_p280_8h}{}\label{_b_m_p280_8h}\index{Core/Inc/BMP280.h@{Core/Inc/BMP280.h}}
+
+
+BMP280 driver file header.  
+
+
+{\ttfamily \#include \"{}stm32f1xx\+\_\+hal.\+h\"{}}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{Indent}\textbf{ Sensor I2C addresses}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a468c31ab40f4b1c1c0969f27a7b08a8d}{BMP280\+\_\+\+DEVICE\+\_\+\+ADDRESS\+\_\+\+GND}}~0x76 $<$$<$ 1
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_adb76c0f71c1f084869ac41aa5b0fbb97}{BMP280\+\_\+\+DEVICE\+\_\+\+ADDRESS\+\_\+\+VDDIO}}~0x77 $<$$<$ 1
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Raw temperature data registers addresses, read only}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a887f1b7dab20ccebe9b1c451f15d3c86}{BMP280\+\_\+\+REG\+\_\+\+TEMP\+\_\+\+XLSB}}~0x\+FC
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a946474615d59dfab906fd7a7613e9b35}{BMP280\+\_\+\+REG\+\_\+\+TEMP\+\_\+\+LSB}}~0x\+FB
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a2cd2723c469cf7c1dfcdbd953593c474}{BMP280\+\_\+\+REG\+\_\+\+TEMP\+\_\+\+MSB}}~0x\+FA
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Raw pressure data registers addresses, read only}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_aeaaf4fef06ddf4bea3d4181a450bccf9}{BMP280\+\_\+\+REG\+\_\+\+PRESS\+\_\+\+XLSB}}~0x\+F9
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_ac703068787eaa09f9dab28448412cfab}{BMP280\+\_\+\+REG\+\_\+\+PRESS\+\_\+\+LSB}}~0x\+F8
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_afa572b770b46ca3553cf4ed2de98d7f4}{BMP280\+\_\+\+REG\+\_\+\+PRESS\+\_\+\+MSB}}~0x\+F7
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Control registers addresses, read+write}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a45694d6e3967184999c884d88a76178e}{BMP280\+\_\+\+REG\+\_\+\+CONFIG}}~0x\+F5
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_ac7b0712eb91fb4c21e488cf9d1177dbb}{BMP280\+\_\+\+REG\+\_\+\+CTRL\+\_\+\+MEAS}}~0x\+F4
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Status register address, do not write}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a51471f4c3ee565c77fdcca39802cc197}{BMP280\+\_\+\+REG\+\_\+\+STATUS}}~0x\+F3
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Reset register address, write only}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a32455aa8a6c26667ef99d73fc02b662b}{BMP280\+\_\+\+REG\+\_\+\+RESET}}~0x\+E0
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Device ID register address, read only}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a37f071326f27f31400e13cc00ff3faa4}{BMP280\+\_\+\+REG\+\_\+\+ID}}~0x\+D0
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Calibration registers addresses, read only}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a97962408e63e55ea3578d1b0a99eac41}{BMP280\+\_\+\+REG\+\_\+\+CALIB25}}~0x\+A1
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_aa7988786649370209fc8323637268e43}{BMP280\+\_\+\+REG\+\_\+\+CALIB24}}~0x\+A0
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a50a84bd024cd9b2041442a37c1e90500}{BMP280\+\_\+\+REG\+\_\+\+CALIB23}}~0x9F
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a88b023151ee7aec3d5d801e00ed5ac47}{BMP280\+\_\+\+REG\+\_\+\+CALIB22}}~0x9E
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a5c276336b9ee369bb00c09b3d4a30e27}{BMP280\+\_\+\+REG\+\_\+\+CALIB21}}~0x9D
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a06ad55598d2a9d689e73e2f55273de87}{BMP280\+\_\+\+REG\+\_\+\+CALIB20}}~0x9C
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a793311c7ee3b9910d1f689fd195058e8}{BMP280\+\_\+\+REG\+\_\+\+CALIB19}}~0x9B
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a30cba2de2b669753b1620c75a0f97483}{BMP280\+\_\+\+REG\+\_\+\+CALIB18}}~0x9A
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a9e0a5a2fb4c5c21dc1e8ea9328bbad3d}{BMP280\+\_\+\+REG\+\_\+\+CALIB17}}~0x99
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a56fc23d792169a1d9e066505f515ed8e}{BMP280\+\_\+\+REG\+\_\+\+CALIB16}}~0x98
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a626352f47ed77c31bec21e81b249cbb3}{BMP280\+\_\+\+REG\+\_\+\+CALIB15}}~0x97
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_afbcd452ee26faedcdd1020dd8d752b86}{BMP280\+\_\+\+REG\+\_\+\+CALIB14}}~0x96
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a7afbd074863f1d8de3731fa1987520b8}{BMP280\+\_\+\+REG\+\_\+\+CALIB13}}~0x95
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a9ebb20c293203ee480012201c1df6680}{BMP280\+\_\+\+REG\+\_\+\+CALIB12}}~0x94
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_abbfc3b0eb6c4235586f18051bdbf38b1}{BMP280\+\_\+\+REG\+\_\+\+CALIB11}}~0x93
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_abfd562aa0807a7d1803a6fa38f5496b7}{BMP280\+\_\+\+REG\+\_\+\+CALIB10}}~0x92
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a81a46ee0b00485e0657cf76b1cce5b01}{BMP280\+\_\+\+REG\+\_\+\+CALIB09}}~0x91
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a148649a97ed7cd452287df879beabd79}{BMP280\+\_\+\+REG\+\_\+\+CALIB08}}~0x90
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a205dc689c15365ad2975bba06152395c}{BMP280\+\_\+\+REG\+\_\+\+CALIB07}}~0x8F
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a237925bd02267e689c0f3d78c8088b70}{BMP280\+\_\+\+REG\+\_\+\+CALIB06}}~0x8E
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_ab6ee1f2e64248adc45941a45e04c2ce5}{BMP280\+\_\+\+REG\+\_\+\+CALIB05}}~0x8D
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a1b6e9c4165b80b826cc28b799cc2aed5}{BMP280\+\_\+\+REG\+\_\+\+CALIB04}}~0x8C
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a4768e06dc79fe2ff8787207a9c8b1658}{BMP280\+\_\+\+REG\+\_\+\+CALIB03}}~0x8B
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a5556166963499a28c9d7b2faa4cdfdd3}{BMP280\+\_\+\+REG\+\_\+\+CALIB02}}~0x8A
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a1531ba8e60484b247a3306ff88ff6ea1}{BMP280\+\_\+\+REG\+\_\+\+CALIB01}}~0x89
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a65a9992fffa84159e9def0767496d73d}{BMP280\+\_\+\+REG\+\_\+\+CALIB00}}~0x88
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Valid ID register value}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_ae555c4beada054eef0b2b35d33485b6e}{BMP280\+\_\+\+VAL\+\_\+\+DEVID}}~0x58
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Valid RESET register value}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a0713f808c4274cf059c29857058d80d9}{BMP280\+\_\+\+VAL\+\_\+\+RESET}}~0x\+B6
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Valid STATUS register flags masks}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a76d989f888e25c530c856cef07a31e10}{BMP280\+\_\+\+VAL\+\_\+\+STATUS\+\_\+\+MEASURING}}~1U $<$$<$ 3
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a88a9a812a683d8d2d05d2ba5a87fe947}{BMP280\+\_\+\+VAL\+\_\+\+STATUS\+\_\+\+IM\+\_\+\+UPDATE}}~1U $<$$<$ 0
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Valid CTRL\+\_\+\+MEAS register acquisition option values}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a015280a4d51e99c7befe6132e7a253d9}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+T\+\_\+0}}~0b00000000
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_aca9cd4401dae45cf6b4049eb0749fbd7}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+T\+\_\+1}}~0b00100000
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a2dbf42869041cd539440b9808600ee22}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+T\+\_\+2}}~0b01000000
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a4bb10eee0f71cc2befcc271c5d6df3c8}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+T\+\_\+4}}~0b01100000
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_ad68704ed847aec8eddbae239fdd71834}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+T\+\_\+8}}~0b10000000
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_aed915bd536e89f6556cae09c197ab6af}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+T\+\_\+16}}~0b11100000
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a0089d28848347728df01c71693711d34}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+P\+\_\+0}}~0b00000000
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_aaa419cad89d98050e63dc6131c846993}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+P\+\_\+1}}~0b00000100
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a74c563435999df06f8d2544f5514fa06}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+P\+\_\+2}}~0b00001000
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a39fd9575b310452d7d09c4b8fdeae9d0}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+P\+\_\+4}}~0b00001100
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_ae5c26cd953a897a9a5ac372802bb4222}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+P\+\_\+8}}~0b00010000
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a22261e836f7905525a4c7a8e594f8386}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+P\+\_\+16}}~0b00011100
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a210646d7540cf67c79589cc03dc65f79}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+MODE\+\_\+\+SLEEP}}~0b00000000
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a8647eb17cbd504a3c61bc9cf2c77c6a0}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+MODE\+\_\+\+FORCED}}~0b00000001
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_aaff829e4e8346fb75e75c2d09a7b38c7}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+MODE\+\_\+\+NORMAL}}~0b00000011
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a197ccf56d55438760b2ee5e759191e41}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+T\+\_\+\+SB\+\_\+0\+\_\+5}}~0b00000000
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a7313066af9578e5cc4b746eec02eb9b7}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+T\+\_\+\+SB\+\_\+62\+\_\+5}}~0b00100000
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_ad8282a6c32bac9ec55cc4a7314934519}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+T\+\_\+\+SB\+\_\+125}}~0b01000000
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a5d893600fd44a8fd8cabb35b3b073de4}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+T\+\_\+\+SB\+\_\+250}}~0b01100000
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a7ddb93977737179cf87566577b6a9589}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+T\+\_\+\+SB\+\_\+500}}~0b10000000
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a1a719c6f612e8b99a4284cf76c6402db}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+T\+\_\+\+SB\+\_\+1000}}~0b10100000
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a2fe1226fff169e00841ab6e45e3a0cd2}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+T\+\_\+\+SB\+\_\+2000}}~0b11000000
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_ac75028a19d9e72262b3edb460776f4af}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+T\+\_\+\+SB\+\_\+4000}}~0b11100000
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a80ec11646c03b6fe4440bfe05d21a0d8}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+FILTER\+\_\+0}}~0b00000000
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_aa5755b9a99976f9d3084404bed815c01}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+FILTER\+\_\+2}}~0b00000100
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a6082f464c4ed4338bb52c6cf3059b36f}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+FILTER\+\_\+4}}~0b00001000
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a8ab8e426d3e5a402187f636a9bd12d63}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+FILTER\+\_\+8}}~0b00001100
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a1b6b4908cac370bf6f3dc442a4daf3f3}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+FILTER\+\_\+16}}~0b00010000
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a342405e826ad2dc7dbbb46611b2c24c7}{BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+SPI3\+W\+\_\+\+EN}}~0b00000001
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ MCU specific setting -\/ affects pressure processing formula}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a2151bf39d798c80e3d034fa46a1aefb1}{RETURN\+\_\+64\+BIT}}~true
+\item 
+\#define \mbox{\hyperlink{_b_m_p280_8h_a01bd6e4eda33933c701a8e99802b89d2}{RETURN\+\_\+32\+BIT}}~false
+\end{DoxyCompactItemize}
+\end{Indent}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{_b_m_p280_8h_a9017ca1c3d95ac8a0a3b96693a425312}{BMP280\+\_\+\+Init\+\_\+\+I2C}} (uint8\+\_\+t osrs\+\_\+t, uint8\+\_\+t osrs\+\_\+p, uint8\+\_\+t acq\+\_\+mode, uint8\+\_\+t t\+\_\+sb, uint8\+\_\+t filter\+\_\+tc, I2\+C\+\_\+\+Handle\+Type\+Def i2c\+\_\+handle, uint8\+\_\+t device\+\_\+address)
+\begin{DoxyCompactList}\small\item\em Initialize sensor with chosen settings. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_b_m_p280_8h_a4843d4cd03b3b25f4dc8a6bc093d34eb}{BMP280\+\_\+\+Calibration\+Constants\+Read\+\_\+\+I2C}} (I2\+C\+\_\+\+Handle\+Type\+Def i2c\+\_\+handle, uint8\+\_\+t device\+\_\+address)
+\begin{DoxyCompactList}\small\item\em Read sensor calibration parameters over I2C. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{_b_m_p280_8h_aac5dadd8c2f03898ed77fdb2eb77c0fd}{BMP280\+\_\+\+Wake\+\_\+\+I2C}} (I2\+C\+\_\+\+Handle\+Type\+Def i2c\+\_\+handle, uint8\+\_\+t device\+\_\+address)
+\begin{DoxyCompactList}\small\item\em Wake sensor over I2C -\/ used when measuring in forced mode. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{_b_m_p280_8h_a5772ec5beaed520ac8bf4d0599ebb05e}{BMP280\+\_\+\+Measure\+\_\+\+I2C}} (I2\+C\+\_\+\+Handle\+Type\+Def i2c\+\_\+handle, uint8\+\_\+t device\+\_\+address)
+\begin{DoxyCompactList}\small\item\em Measure temperature and pressure over I2C. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+BMP280 driver file header. 
+
+Created on\+: Apr 5, 2024 ~\newline
+ Author\+: Piotr Jucha 
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{_b_m_p280_8h_a468c31ab40f4b1c1c0969f27a7b08a8d}\label{_b_m_p280_8h_a468c31ab40f4b1c1c0969f27a7b08a8d} 
+\index{BMP280.h@{BMP280.h}!BMP280\_DEVICE\_ADDRESS\_GND@{BMP280\_DEVICE\_ADDRESS\_GND}}
+\index{BMP280\_DEVICE\_ADDRESS\_GND@{BMP280\_DEVICE\_ADDRESS\_GND}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_DEVICE\_ADDRESS\_GND}{BMP280\_DEVICE\_ADDRESS\_GND}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+DEVICE\+\_\+\+ADDRESS\+\_\+\+GND~0x76 $<$$<$ 1}
+
+Used when SDO pulled down \Hypertarget{_b_m_p280_8h_adb76c0f71c1f084869ac41aa5b0fbb97}\label{_b_m_p280_8h_adb76c0f71c1f084869ac41aa5b0fbb97} 
+\index{BMP280.h@{BMP280.h}!BMP280\_DEVICE\_ADDRESS\_VDDIO@{BMP280\_DEVICE\_ADDRESS\_VDDIO}}
+\index{BMP280\_DEVICE\_ADDRESS\_VDDIO@{BMP280\_DEVICE\_ADDRESS\_VDDIO}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_DEVICE\_ADDRESS\_VDDIO}{BMP280\_DEVICE\_ADDRESS\_VDDIO}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+DEVICE\+\_\+\+ADDRESS\+\_\+\+VDDIO~0x77 $<$$<$ 1}
+
+Used when SDO pulled up \Hypertarget{_b_m_p280_8h_a65a9992fffa84159e9def0767496d73d}\label{_b_m_p280_8h_a65a9992fffa84159e9def0767496d73d} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB00@{BMP280\_REG\_CALIB00}}
+\index{BMP280\_REG\_CALIB00@{BMP280\_REG\_CALIB00}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB00}{BMP280\_REG\_CALIB00}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB00~0x88}
+
+Calibration register 0 \Hypertarget{_b_m_p280_8h_a1531ba8e60484b247a3306ff88ff6ea1}\label{_b_m_p280_8h_a1531ba8e60484b247a3306ff88ff6ea1} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB01@{BMP280\_REG\_CALIB01}}
+\index{BMP280\_REG\_CALIB01@{BMP280\_REG\_CALIB01}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB01}{BMP280\_REG\_CALIB01}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB01~0x89}
+
+Calibration register 1 \Hypertarget{_b_m_p280_8h_a5556166963499a28c9d7b2faa4cdfdd3}\label{_b_m_p280_8h_a5556166963499a28c9d7b2faa4cdfdd3} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB02@{BMP280\_REG\_CALIB02}}
+\index{BMP280\_REG\_CALIB02@{BMP280\_REG\_CALIB02}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB02}{BMP280\_REG\_CALIB02}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB02~0x8A}
+
+Calibration register 2 \Hypertarget{_b_m_p280_8h_a4768e06dc79fe2ff8787207a9c8b1658}\label{_b_m_p280_8h_a4768e06dc79fe2ff8787207a9c8b1658} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB03@{BMP280\_REG\_CALIB03}}
+\index{BMP280\_REG\_CALIB03@{BMP280\_REG\_CALIB03}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB03}{BMP280\_REG\_CALIB03}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB03~0x8B}
+
+Calibration register 3 \Hypertarget{_b_m_p280_8h_a1b6e9c4165b80b826cc28b799cc2aed5}\label{_b_m_p280_8h_a1b6e9c4165b80b826cc28b799cc2aed5} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB04@{BMP280\_REG\_CALIB04}}
+\index{BMP280\_REG\_CALIB04@{BMP280\_REG\_CALIB04}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB04}{BMP280\_REG\_CALIB04}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB04~0x8C}
+
+Calibration register 4 \Hypertarget{_b_m_p280_8h_ab6ee1f2e64248adc45941a45e04c2ce5}\label{_b_m_p280_8h_ab6ee1f2e64248adc45941a45e04c2ce5} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB05@{BMP280\_REG\_CALIB05}}
+\index{BMP280\_REG\_CALIB05@{BMP280\_REG\_CALIB05}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB05}{BMP280\_REG\_CALIB05}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB05~0x8D}
+
+Calibration register 5 \Hypertarget{_b_m_p280_8h_a237925bd02267e689c0f3d78c8088b70}\label{_b_m_p280_8h_a237925bd02267e689c0f3d78c8088b70} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB06@{BMP280\_REG\_CALIB06}}
+\index{BMP280\_REG\_CALIB06@{BMP280\_REG\_CALIB06}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB06}{BMP280\_REG\_CALIB06}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB06~0x8E}
+
+Calibration register 6 \Hypertarget{_b_m_p280_8h_a205dc689c15365ad2975bba06152395c}\label{_b_m_p280_8h_a205dc689c15365ad2975bba06152395c} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB07@{BMP280\_REG\_CALIB07}}
+\index{BMP280\_REG\_CALIB07@{BMP280\_REG\_CALIB07}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB07}{BMP280\_REG\_CALIB07}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB07~0x8F}
+
+Calibration register 7 \Hypertarget{_b_m_p280_8h_a148649a97ed7cd452287df879beabd79}\label{_b_m_p280_8h_a148649a97ed7cd452287df879beabd79} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB08@{BMP280\_REG\_CALIB08}}
+\index{BMP280\_REG\_CALIB08@{BMP280\_REG\_CALIB08}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB08}{BMP280\_REG\_CALIB08}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB08~0x90}
+
+Calibration register 8 \Hypertarget{_b_m_p280_8h_a81a46ee0b00485e0657cf76b1cce5b01}\label{_b_m_p280_8h_a81a46ee0b00485e0657cf76b1cce5b01} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB09@{BMP280\_REG\_CALIB09}}
+\index{BMP280\_REG\_CALIB09@{BMP280\_REG\_CALIB09}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB09}{BMP280\_REG\_CALIB09}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB09~0x91}
+
+Calibration register 9 \Hypertarget{_b_m_p280_8h_abfd562aa0807a7d1803a6fa38f5496b7}\label{_b_m_p280_8h_abfd562aa0807a7d1803a6fa38f5496b7} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB10@{BMP280\_REG\_CALIB10}}
+\index{BMP280\_REG\_CALIB10@{BMP280\_REG\_CALIB10}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB10}{BMP280\_REG\_CALIB10}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB10~0x92}
+
+Calibration register 10 \Hypertarget{_b_m_p280_8h_abbfc3b0eb6c4235586f18051bdbf38b1}\label{_b_m_p280_8h_abbfc3b0eb6c4235586f18051bdbf38b1} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB11@{BMP280\_REG\_CALIB11}}
+\index{BMP280\_REG\_CALIB11@{BMP280\_REG\_CALIB11}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB11}{BMP280\_REG\_CALIB11}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB11~0x93}
+
+Calibration register 11 \Hypertarget{_b_m_p280_8h_a9ebb20c293203ee480012201c1df6680}\label{_b_m_p280_8h_a9ebb20c293203ee480012201c1df6680} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB12@{BMP280\_REG\_CALIB12}}
+\index{BMP280\_REG\_CALIB12@{BMP280\_REG\_CALIB12}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB12}{BMP280\_REG\_CALIB12}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB12~0x94}
+
+Calibration register 12 \Hypertarget{_b_m_p280_8h_a7afbd074863f1d8de3731fa1987520b8}\label{_b_m_p280_8h_a7afbd074863f1d8de3731fa1987520b8} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB13@{BMP280\_REG\_CALIB13}}
+\index{BMP280\_REG\_CALIB13@{BMP280\_REG\_CALIB13}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB13}{BMP280\_REG\_CALIB13}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB13~0x95}
+
+Calibration register 13 \Hypertarget{_b_m_p280_8h_afbcd452ee26faedcdd1020dd8d752b86}\label{_b_m_p280_8h_afbcd452ee26faedcdd1020dd8d752b86} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB14@{BMP280\_REG\_CALIB14}}
+\index{BMP280\_REG\_CALIB14@{BMP280\_REG\_CALIB14}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB14}{BMP280\_REG\_CALIB14}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB14~0x96}
+
+Calibration register 14 \Hypertarget{_b_m_p280_8h_a626352f47ed77c31bec21e81b249cbb3}\label{_b_m_p280_8h_a626352f47ed77c31bec21e81b249cbb3} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB15@{BMP280\_REG\_CALIB15}}
+\index{BMP280\_REG\_CALIB15@{BMP280\_REG\_CALIB15}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB15}{BMP280\_REG\_CALIB15}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB15~0x97}
+
+Calibration register 15 \Hypertarget{_b_m_p280_8h_a56fc23d792169a1d9e066505f515ed8e}\label{_b_m_p280_8h_a56fc23d792169a1d9e066505f515ed8e} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB16@{BMP280\_REG\_CALIB16}}
+\index{BMP280\_REG\_CALIB16@{BMP280\_REG\_CALIB16}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB16}{BMP280\_REG\_CALIB16}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB16~0x98}
+
+Calibration register 16 \Hypertarget{_b_m_p280_8h_a9e0a5a2fb4c5c21dc1e8ea9328bbad3d}\label{_b_m_p280_8h_a9e0a5a2fb4c5c21dc1e8ea9328bbad3d} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB17@{BMP280\_REG\_CALIB17}}
+\index{BMP280\_REG\_CALIB17@{BMP280\_REG\_CALIB17}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB17}{BMP280\_REG\_CALIB17}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB17~0x99}
+
+Calibration register 17 \Hypertarget{_b_m_p280_8h_a30cba2de2b669753b1620c75a0f97483}\label{_b_m_p280_8h_a30cba2de2b669753b1620c75a0f97483} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB18@{BMP280\_REG\_CALIB18}}
+\index{BMP280\_REG\_CALIB18@{BMP280\_REG\_CALIB18}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB18}{BMP280\_REG\_CALIB18}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB18~0x9A}
+
+Calibration register 18 \Hypertarget{_b_m_p280_8h_a793311c7ee3b9910d1f689fd195058e8}\label{_b_m_p280_8h_a793311c7ee3b9910d1f689fd195058e8} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB19@{BMP280\_REG\_CALIB19}}
+\index{BMP280\_REG\_CALIB19@{BMP280\_REG\_CALIB19}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB19}{BMP280\_REG\_CALIB19}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB19~0x9B}
+
+Calibration register 19 \Hypertarget{_b_m_p280_8h_a06ad55598d2a9d689e73e2f55273de87}\label{_b_m_p280_8h_a06ad55598d2a9d689e73e2f55273de87} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB20@{BMP280\_REG\_CALIB20}}
+\index{BMP280\_REG\_CALIB20@{BMP280\_REG\_CALIB20}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB20}{BMP280\_REG\_CALIB20}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB20~0x9C}
+
+Calibration register 20 \Hypertarget{_b_m_p280_8h_a5c276336b9ee369bb00c09b3d4a30e27}\label{_b_m_p280_8h_a5c276336b9ee369bb00c09b3d4a30e27} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB21@{BMP280\_REG\_CALIB21}}
+\index{BMP280\_REG\_CALIB21@{BMP280\_REG\_CALIB21}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB21}{BMP280\_REG\_CALIB21}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB21~0x9D}
+
+Calibration register 21 \Hypertarget{_b_m_p280_8h_a88b023151ee7aec3d5d801e00ed5ac47}\label{_b_m_p280_8h_a88b023151ee7aec3d5d801e00ed5ac47} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB22@{BMP280\_REG\_CALIB22}}
+\index{BMP280\_REG\_CALIB22@{BMP280\_REG\_CALIB22}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB22}{BMP280\_REG\_CALIB22}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB22~0x9E}
+
+Calibration register 22 \Hypertarget{_b_m_p280_8h_a50a84bd024cd9b2041442a37c1e90500}\label{_b_m_p280_8h_a50a84bd024cd9b2041442a37c1e90500} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB23@{BMP280\_REG\_CALIB23}}
+\index{BMP280\_REG\_CALIB23@{BMP280\_REG\_CALIB23}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB23}{BMP280\_REG\_CALIB23}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB23~0x9F}
+
+Calibration register 23 \Hypertarget{_b_m_p280_8h_aa7988786649370209fc8323637268e43}\label{_b_m_p280_8h_aa7988786649370209fc8323637268e43} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB24@{BMP280\_REG\_CALIB24}}
+\index{BMP280\_REG\_CALIB24@{BMP280\_REG\_CALIB24}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB24}{BMP280\_REG\_CALIB24}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB24~0x\+A0}
+
+Calibration register 24 \Hypertarget{_b_m_p280_8h_a97962408e63e55ea3578d1b0a99eac41}\label{_b_m_p280_8h_a97962408e63e55ea3578d1b0a99eac41} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CALIB25@{BMP280\_REG\_CALIB25}}
+\index{BMP280\_REG\_CALIB25@{BMP280\_REG\_CALIB25}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CALIB25}{BMP280\_REG\_CALIB25}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CALIB25~0x\+A1}
+
+Calibration register 25 \Hypertarget{_b_m_p280_8h_a45694d6e3967184999c884d88a76178e}\label{_b_m_p280_8h_a45694d6e3967184999c884d88a76178e} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CONFIG@{BMP280\_REG\_CONFIG}}
+\index{BMP280\_REG\_CONFIG@{BMP280\_REG\_CONFIG}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CONFIG}{BMP280\_REG\_CONFIG}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CONFIG~0x\+F5}
+
+Configuration register \Hypertarget{_b_m_p280_8h_ac7b0712eb91fb4c21e488cf9d1177dbb}\label{_b_m_p280_8h_ac7b0712eb91fb4c21e488cf9d1177dbb} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_CTRL\_MEAS@{BMP280\_REG\_CTRL\_MEAS}}
+\index{BMP280\_REG\_CTRL\_MEAS@{BMP280\_REG\_CTRL\_MEAS}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_CTRL\_MEAS}{BMP280\_REG\_CTRL\_MEAS}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+CTRL\+\_\+\+MEAS~0x\+F4}
+
+Data acquisition mode register \Hypertarget{_b_m_p280_8h_a37f071326f27f31400e13cc00ff3faa4}\label{_b_m_p280_8h_a37f071326f27f31400e13cc00ff3faa4} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_ID@{BMP280\_REG\_ID}}
+\index{BMP280\_REG\_ID@{BMP280\_REG\_ID}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_ID}{BMP280\_REG\_ID}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+ID~0x\+D0}
+
+DEVID register \Hypertarget{_b_m_p280_8h_ac703068787eaa09f9dab28448412cfab}\label{_b_m_p280_8h_ac703068787eaa09f9dab28448412cfab} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_PRESS\_LSB@{BMP280\_REG\_PRESS\_LSB}}
+\index{BMP280\_REG\_PRESS\_LSB@{BMP280\_REG\_PRESS\_LSB}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_PRESS\_LSB}{BMP280\_REG\_PRESS\_LSB}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+PRESS\+\_\+\+LSB~0x\+F8}
+
+Middle pressure data chunk \Hypertarget{_b_m_p280_8h_afa572b770b46ca3553cf4ed2de98d7f4}\label{_b_m_p280_8h_afa572b770b46ca3553cf4ed2de98d7f4} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_PRESS\_MSB@{BMP280\_REG\_PRESS\_MSB}}
+\index{BMP280\_REG\_PRESS\_MSB@{BMP280\_REG\_PRESS\_MSB}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_PRESS\_MSB}{BMP280\_REG\_PRESS\_MSB}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+PRESS\+\_\+\+MSB~0x\+F7}
+
+MSB pressure data chunk \Hypertarget{_b_m_p280_8h_aeaaf4fef06ddf4bea3d4181a450bccf9}\label{_b_m_p280_8h_aeaaf4fef06ddf4bea3d4181a450bccf9} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_PRESS\_XLSB@{BMP280\_REG\_PRESS\_XLSB}}
+\index{BMP280\_REG\_PRESS\_XLSB@{BMP280\_REG\_PRESS\_XLSB}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_PRESS\_XLSB}{BMP280\_REG\_PRESS\_XLSB}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+PRESS\+\_\+\+XLSB~0x\+F9}
+
+LSB pressure data chunk \Hypertarget{_b_m_p280_8h_a32455aa8a6c26667ef99d73fc02b662b}\label{_b_m_p280_8h_a32455aa8a6c26667ef99d73fc02b662b} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_RESET@{BMP280\_REG\_RESET}}
+\index{BMP280\_REG\_RESET@{BMP280\_REG\_RESET}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_RESET}{BMP280\_REG\_RESET}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+RESET~0x\+E0}
+
+Device reset register \Hypertarget{_b_m_p280_8h_a51471f4c3ee565c77fdcca39802cc197}\label{_b_m_p280_8h_a51471f4c3ee565c77fdcca39802cc197} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_STATUS@{BMP280\_REG\_STATUS}}
+\index{BMP280\_REG\_STATUS@{BMP280\_REG\_STATUS}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_STATUS}{BMP280\_REG\_STATUS}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+STATUS~0x\+F3}
+
+Device status register \Hypertarget{_b_m_p280_8h_a946474615d59dfab906fd7a7613e9b35}\label{_b_m_p280_8h_a946474615d59dfab906fd7a7613e9b35} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_TEMP\_LSB@{BMP280\_REG\_TEMP\_LSB}}
+\index{BMP280\_REG\_TEMP\_LSB@{BMP280\_REG\_TEMP\_LSB}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_TEMP\_LSB}{BMP280\_REG\_TEMP\_LSB}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+TEMP\+\_\+\+LSB~0x\+FB}
+
+Middle temperature data chunk \Hypertarget{_b_m_p280_8h_a2cd2723c469cf7c1dfcdbd953593c474}\label{_b_m_p280_8h_a2cd2723c469cf7c1dfcdbd953593c474} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_TEMP\_MSB@{BMP280\_REG\_TEMP\_MSB}}
+\index{BMP280\_REG\_TEMP\_MSB@{BMP280\_REG\_TEMP\_MSB}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_TEMP\_MSB}{BMP280\_REG\_TEMP\_MSB}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+TEMP\+\_\+\+MSB~0x\+FA}
+
+MSB temperature data chunk \Hypertarget{_b_m_p280_8h_a887f1b7dab20ccebe9b1c451f15d3c86}\label{_b_m_p280_8h_a887f1b7dab20ccebe9b1c451f15d3c86} 
+\index{BMP280.h@{BMP280.h}!BMP280\_REG\_TEMP\_XLSB@{BMP280\_REG\_TEMP\_XLSB}}
+\index{BMP280\_REG\_TEMP\_XLSB@{BMP280\_REG\_TEMP\_XLSB}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_REG\_TEMP\_XLSB}{BMP280\_REG\_TEMP\_XLSB}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+REG\+\_\+\+TEMP\+\_\+\+XLSB~0x\+FC}
+
+LSB temperature data chunk \Hypertarget{_b_m_p280_8h_a80ec11646c03b6fe4440bfe05d21a0d8}\label{_b_m_p280_8h_a80ec11646c03b6fe4440bfe05d21a0d8} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_0@{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_0}}
+\index{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_0@{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_0}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_0}{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_0}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+FILTER\+\_\+0~0b00000000}
+
+Filter disabled \Hypertarget{_b_m_p280_8h_a1b6b4908cac370bf6f3dc442a4daf3f3}\label{_b_m_p280_8h_a1b6b4908cac370bf6f3dc442a4daf3f3} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_16@{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_16}}
+\index{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_16@{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_16}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_16}{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_16}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+FILTER\+\_\+16~0b00010000}
+
+16x filter \Hypertarget{_b_m_p280_8h_aa5755b9a99976f9d3084404bed815c01}\label{_b_m_p280_8h_aa5755b9a99976f9d3084404bed815c01} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_2@{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_2}}
+\index{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_2@{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_2}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_2}{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_2}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+FILTER\+\_\+2~0b00000100}
+
+2x filter \Hypertarget{_b_m_p280_8h_a6082f464c4ed4338bb52c6cf3059b36f}\label{_b_m_p280_8h_a6082f464c4ed4338bb52c6cf3059b36f} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_4@{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_4}}
+\index{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_4@{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_4}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_4}{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_4}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+FILTER\+\_\+4~0b00001000}
+
+4x filter \Hypertarget{_b_m_p280_8h_a8ab8e426d3e5a402187f636a9bd12d63}\label{_b_m_p280_8h_a8ab8e426d3e5a402187f636a9bd12d63} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_8@{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_8}}
+\index{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_8@{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_8}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_8}{BMP280\_VAL\_CTRL\_CONFIG\_FILTER\_8}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+FILTER\+\_\+8~0b00001100}
+
+8x filter \Hypertarget{_b_m_p280_8h_a197ccf56d55438760b2ee5e759191e41}\label{_b_m_p280_8h_a197ccf56d55438760b2ee5e759191e41} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_0\_5@{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_0\_5}}
+\index{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_0\_5@{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_0\_5}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_0\_5}{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_0\_5}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+T\+\_\+\+SB\+\_\+0\+\_\+5~0b00000000}
+
+Standby 0.\+5ms \Hypertarget{_b_m_p280_8h_a1a719c6f612e8b99a4284cf76c6402db}\label{_b_m_p280_8h_a1a719c6f612e8b99a4284cf76c6402db} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_1000@{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_1000}}
+\index{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_1000@{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_1000}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_1000}{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_1000}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+T\+\_\+\+SB\+\_\+1000~0b10100000}
+
+Standby 1000ms \Hypertarget{_b_m_p280_8h_ad8282a6c32bac9ec55cc4a7314934519}\label{_b_m_p280_8h_ad8282a6c32bac9ec55cc4a7314934519} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_125@{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_125}}
+\index{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_125@{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_125}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_125}{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_125}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+T\+\_\+\+SB\+\_\+125~0b01000000}
+
+Standby 125ms \Hypertarget{_b_m_p280_8h_a2fe1226fff169e00841ab6e45e3a0cd2}\label{_b_m_p280_8h_a2fe1226fff169e00841ab6e45e3a0cd2} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_2000@{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_2000}}
+\index{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_2000@{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_2000}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_2000}{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_2000}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+T\+\_\+\+SB\+\_\+2000~0b11000000}
+
+Standby 2000ms \Hypertarget{_b_m_p280_8h_a5d893600fd44a8fd8cabb35b3b073de4}\label{_b_m_p280_8h_a5d893600fd44a8fd8cabb35b3b073de4} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_250@{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_250}}
+\index{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_250@{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_250}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_250}{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_250}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+T\+\_\+\+SB\+\_\+250~0b01100000}
+
+Standby 250ms \Hypertarget{_b_m_p280_8h_ac75028a19d9e72262b3edb460776f4af}\label{_b_m_p280_8h_ac75028a19d9e72262b3edb460776f4af} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_4000@{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_4000}}
+\index{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_4000@{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_4000}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_4000}{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_4000}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+T\+\_\+\+SB\+\_\+4000~0b11100000}
+
+Standby 4000ms \Hypertarget{_b_m_p280_8h_a7ddb93977737179cf87566577b6a9589}\label{_b_m_p280_8h_a7ddb93977737179cf87566577b6a9589} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_500@{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_500}}
+\index{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_500@{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_500}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_500}{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_500}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+T\+\_\+\+SB\+\_\+500~0b10000000}
+
+Standby 500ms \Hypertarget{_b_m_p280_8h_a7313066af9578e5cc4b746eec02eb9b7}\label{_b_m_p280_8h_a7313066af9578e5cc4b746eec02eb9b7} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_62\_5@{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_62\_5}}
+\index{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_62\_5@{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_62\_5}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_62\_5}{BMP280\_VAL\_CTRL\_CONFIG\_T\_SB\_62\_5}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+CONFIG\+\_\+\+T\+\_\+\+SB\+\_\+62\+\_\+5~0b00100000}
+
+Standby 62.\+25ms \Hypertarget{_b_m_p280_8h_a8647eb17cbd504a3c61bc9cf2c77c6a0}\label{_b_m_p280_8h_a8647eb17cbd504a3c61bc9cf2c77c6a0} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_MEAS\_MODE\_FORCED@{BMP280\_VAL\_CTRL\_MEAS\_MODE\_FORCED}}
+\index{BMP280\_VAL\_CTRL\_MEAS\_MODE\_FORCED@{BMP280\_VAL\_CTRL\_MEAS\_MODE\_FORCED}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_MEAS\_MODE\_FORCED}{BMP280\_VAL\_CTRL\_MEAS\_MODE\_FORCED}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+MODE\+\_\+\+FORCED~0b00000001}
+
+Forced mode \Hypertarget{_b_m_p280_8h_aaff829e4e8346fb75e75c2d09a7b38c7}\label{_b_m_p280_8h_aaff829e4e8346fb75e75c2d09a7b38c7} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_MEAS\_MODE\_NORMAL@{BMP280\_VAL\_CTRL\_MEAS\_MODE\_NORMAL}}
+\index{BMP280\_VAL\_CTRL\_MEAS\_MODE\_NORMAL@{BMP280\_VAL\_CTRL\_MEAS\_MODE\_NORMAL}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_MEAS\_MODE\_NORMAL}{BMP280\_VAL\_CTRL\_MEAS\_MODE\_NORMAL}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+MODE\+\_\+\+NORMAL~0b00000011}
+
+Continuous mode \Hypertarget{_b_m_p280_8h_a210646d7540cf67c79589cc03dc65f79}\label{_b_m_p280_8h_a210646d7540cf67c79589cc03dc65f79} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_MEAS\_MODE\_SLEEP@{BMP280\_VAL\_CTRL\_MEAS\_MODE\_SLEEP}}
+\index{BMP280\_VAL\_CTRL\_MEAS\_MODE\_SLEEP@{BMP280\_VAL\_CTRL\_MEAS\_MODE\_SLEEP}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_MEAS\_MODE\_SLEEP}{BMP280\_VAL\_CTRL\_MEAS\_MODE\_SLEEP}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+MODE\+\_\+\+SLEEP~0b00000000}
+
+Sleep mode \Hypertarget{_b_m_p280_8h_a0089d28848347728df01c71693711d34}\label{_b_m_p280_8h_a0089d28848347728df01c71693711d34} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_0@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_0}}
+\index{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_0@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_0}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_0}{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_0}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+P\+\_\+0~0b00000000}
+
+Disabled measurement \Hypertarget{_b_m_p280_8h_aaa419cad89d98050e63dc6131c846993}\label{_b_m_p280_8h_aaa419cad89d98050e63dc6131c846993} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_1@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_1}}
+\index{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_1@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_1}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_1}{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_1}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+P\+\_\+1~0b00000100}
+
+1x oversampling \Hypertarget{_b_m_p280_8h_a22261e836f7905525a4c7a8e594f8386}\label{_b_m_p280_8h_a22261e836f7905525a4c7a8e594f8386} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_16@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_16}}
+\index{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_16@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_16}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_16}{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_16}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+P\+\_\+16~0b00011100}
+
+16x oversampling \Hypertarget{_b_m_p280_8h_a74c563435999df06f8d2544f5514fa06}\label{_b_m_p280_8h_a74c563435999df06f8d2544f5514fa06} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_2@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_2}}
+\index{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_2@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_2}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_2}{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_2}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+P\+\_\+2~0b00001000}
+
+2x oversampling \Hypertarget{_b_m_p280_8h_a39fd9575b310452d7d09c4b8fdeae9d0}\label{_b_m_p280_8h_a39fd9575b310452d7d09c4b8fdeae9d0} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_4@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_4}}
+\index{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_4@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_4}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_4}{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_4}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+P\+\_\+4~0b00001100}
+
+4x oversampling \Hypertarget{_b_m_p280_8h_ae5c26cd953a897a9a5ac372802bb4222}\label{_b_m_p280_8h_ae5c26cd953a897a9a5ac372802bb4222} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_8@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_8}}
+\index{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_8@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_8}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_8}{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_P\_8}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+P\+\_\+8~0b00010000}
+
+8x oversampling \Hypertarget{_b_m_p280_8h_a015280a4d51e99c7befe6132e7a253d9}\label{_b_m_p280_8h_a015280a4d51e99c7befe6132e7a253d9} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_0@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_0}}
+\index{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_0@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_0}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_0}{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_0}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+T\+\_\+0~0b00000000}
+
+Disabled measurement \Hypertarget{_b_m_p280_8h_aca9cd4401dae45cf6b4049eb0749fbd7}\label{_b_m_p280_8h_aca9cd4401dae45cf6b4049eb0749fbd7} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_1@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_1}}
+\index{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_1@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_1}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_1}{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_1}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+T\+\_\+1~0b00100000}
+
+1x oversampling \Hypertarget{_b_m_p280_8h_aed915bd536e89f6556cae09c197ab6af}\label{_b_m_p280_8h_aed915bd536e89f6556cae09c197ab6af} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_16@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_16}}
+\index{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_16@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_16}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_16}{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_16}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+T\+\_\+16~0b11100000}
+
+16x oversampling \Hypertarget{_b_m_p280_8h_a2dbf42869041cd539440b9808600ee22}\label{_b_m_p280_8h_a2dbf42869041cd539440b9808600ee22} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_2@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_2}}
+\index{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_2@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_2}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_2}{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_2}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+T\+\_\+2~0b01000000}
+
+2x oversampling \Hypertarget{_b_m_p280_8h_a4bb10eee0f71cc2befcc271c5d6df3c8}\label{_b_m_p280_8h_a4bb10eee0f71cc2befcc271c5d6df3c8} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_4@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_4}}
+\index{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_4@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_4}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_4}{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_4}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+T\+\_\+4~0b01100000}
+
+4x oversampling \Hypertarget{_b_m_p280_8h_ad68704ed847aec8eddbae239fdd71834}\label{_b_m_p280_8h_ad68704ed847aec8eddbae239fdd71834} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_8@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_8}}
+\index{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_8@{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_8}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_8}{BMP280\_VAL\_CTRL\_MEAS\_OSRS\_T\_8}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+MEAS\+\_\+\+OSRS\+\_\+\+T\+\_\+8~0b10000000}
+
+8x oversampling \Hypertarget{_b_m_p280_8h_a342405e826ad2dc7dbbb46611b2c24c7}\label{_b_m_p280_8h_a342405e826ad2dc7dbbb46611b2c24c7} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_CTRL\_SPI3W\_EN@{BMP280\_VAL\_CTRL\_SPI3W\_EN}}
+\index{BMP280\_VAL\_CTRL\_SPI3W\_EN@{BMP280\_VAL\_CTRL\_SPI3W\_EN}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_CTRL\_SPI3W\_EN}{BMP280\_VAL\_CTRL\_SPI3W\_EN}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+CTRL\+\_\+\+SPI3\+W\+\_\+\+EN~0b00000001}
+
+Enable SPI 3-\/wire \Hypertarget{_b_m_p280_8h_ae555c4beada054eef0b2b35d33485b6e}\label{_b_m_p280_8h_ae555c4beada054eef0b2b35d33485b6e} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_DEVID@{BMP280\_VAL\_DEVID}}
+\index{BMP280\_VAL\_DEVID@{BMP280\_VAL\_DEVID}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_DEVID}{BMP280\_VAL\_DEVID}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+DEVID~0x58}
+
+Device ID \Hypertarget{_b_m_p280_8h_a0713f808c4274cf059c29857058d80d9}\label{_b_m_p280_8h_a0713f808c4274cf059c29857058d80d9} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_RESET@{BMP280\_VAL\_RESET}}
+\index{BMP280\_VAL\_RESET@{BMP280\_VAL\_RESET}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_RESET}{BMP280\_VAL\_RESET}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+RESET~0x\+B6}
+
+Writing to reset register resets device \Hypertarget{_b_m_p280_8h_a88a9a812a683d8d2d05d2ba5a87fe947}\label{_b_m_p280_8h_a88a9a812a683d8d2d05d2ba5a87fe947} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_STATUS\_IM\_UPDATE@{BMP280\_VAL\_STATUS\_IM\_UPDATE}}
+\index{BMP280\_VAL\_STATUS\_IM\_UPDATE@{BMP280\_VAL\_STATUS\_IM\_UPDATE}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_STATUS\_IM\_UPDATE}{BMP280\_VAL\_STATUS\_IM\_UPDATE}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+STATUS\+\_\+\+IM\+\_\+\+UPDATE~1U $<$$<$ 0}
+
+NVM copying status flag \Hypertarget{_b_m_p280_8h_a76d989f888e25c530c856cef07a31e10}\label{_b_m_p280_8h_a76d989f888e25c530c856cef07a31e10} 
+\index{BMP280.h@{BMP280.h}!BMP280\_VAL\_STATUS\_MEASURING@{BMP280\_VAL\_STATUS\_MEASURING}}
+\index{BMP280\_VAL\_STATUS\_MEASURING@{BMP280\_VAL\_STATUS\_MEASURING}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_VAL\_STATUS\_MEASURING}{BMP280\_VAL\_STATUS\_MEASURING}}
+{\footnotesize\ttfamily \#define BMP280\+\_\+\+VAL\+\_\+\+STATUS\+\_\+\+MEASURING~1U $<$$<$ 3}
+
+Measuring busy flag \Hypertarget{_b_m_p280_8h_a01bd6e4eda33933c701a8e99802b89d2}\label{_b_m_p280_8h_a01bd6e4eda33933c701a8e99802b89d2} 
+\index{BMP280.h@{BMP280.h}!RETURN\_32BIT@{RETURN\_32BIT}}
+\index{RETURN\_32BIT@{RETURN\_32BIT}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{RETURN\_32BIT}{RETURN\_32BIT}}
+{\footnotesize\ttfamily \#define RETURN\+\_\+32\+BIT~false}
+
+for MCU without 64-\/bit operations support \Hypertarget{_b_m_p280_8h_a2151bf39d798c80e3d034fa46a1aefb1}\label{_b_m_p280_8h_a2151bf39d798c80e3d034fa46a1aefb1} 
+\index{BMP280.h@{BMP280.h}!RETURN\_64BIT@{RETURN\_64BIT}}
+\index{RETURN\_64BIT@{RETURN\_64BIT}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{RETURN\_64BIT}{RETURN\_64BIT}}
+{\footnotesize\ttfamily \#define RETURN\+\_\+64\+BIT~true}
+
+for MCU with 64-\/bit operations support 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_b_m_p280_8h_a4843d4cd03b3b25f4dc8a6bc093d34eb}\label{_b_m_p280_8h_a4843d4cd03b3b25f4dc8a6bc093d34eb} 
+\index{BMP280.h@{BMP280.h}!BMP280\_CalibrationConstantsRead\_I2C@{BMP280\_CalibrationConstantsRead\_I2C}}
+\index{BMP280\_CalibrationConstantsRead\_I2C@{BMP280\_CalibrationConstantsRead\_I2C}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_CalibrationConstantsRead\_I2C()}{BMP280\_CalibrationConstantsRead\_I2C()}}
+{\footnotesize\ttfamily void BMP280\+\_\+\+Calibration\+Constants\+Read\+\_\+\+I2C (\begin{DoxyParamCaption}\item[{I2\+C\+\_\+\+Handle\+Type\+Def}]{i2c\+\_\+handle,  }\item[{uint8\+\_\+t}]{device\+\_\+address }\end{DoxyParamCaption})}
+
+
+
+Read sensor calibration parameters over I2C. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i2c\+\_\+handle} & Desired MCU I2C peripheral for communication with sensor \\
+\hline
+{\em device\+\_\+address} & I2C device address\\
+\hline
+\end{DoxyParams}
+Read constants used for temperature and pressure calculations from sensor\textquotesingle{}s memory \Hypertarget{_b_m_p280_8h_a9017ca1c3d95ac8a0a3b96693a425312}\label{_b_m_p280_8h_a9017ca1c3d95ac8a0a3b96693a425312} 
+\index{BMP280.h@{BMP280.h}!BMP280\_Init\_I2C@{BMP280\_Init\_I2C}}
+\index{BMP280\_Init\_I2C@{BMP280\_Init\_I2C}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_Init\_I2C()}{BMP280\_Init\_I2C()}}
+{\footnotesize\ttfamily bool BMP280\+\_\+\+Init\+\_\+\+I2C (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{osrs\+\_\+t,  }\item[{uint8\+\_\+t}]{osrs\+\_\+p,  }\item[{uint8\+\_\+t}]{acq\+\_\+mode,  }\item[{uint8\+\_\+t}]{t\+\_\+sb,  }\item[{uint8\+\_\+t}]{filter\+\_\+tc,  }\item[{I2\+C\+\_\+\+Handle\+Type\+Def}]{i2c\+\_\+handle,  }\item[{uint8\+\_\+t}]{device\+\_\+address }\end{DoxyParamCaption})}
+
+
+
+Initialize sensor with chosen settings. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em osrs\+\_\+t} & Temperature oversampling setting \\
+\hline
+{\em osrs\+\_\+p} & Pressure oversampling setting \\
+\hline
+{\em acq\+\_\+mode} & Acquisition mode setting \\
+\hline
+{\em t\+\_\+sb} & Standby time setting \\
+\hline
+{\em filter\+\_\+tc} & Sensor IIR Filter time constant setting \\
+\hline
+{\em i2c\+\_\+handle} & Desired MCU I2C peripheral for communication with sensor \\
+\hline
+{\em device\+\_\+address} & I2C device address \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Configuration status~\newline
+false == unsuccessful~\newline
+true == successful
+\end{DoxyReturn}
+Reset the sensor, check if device ID is valid, read calibration constants, write oversampling, acquisition mode, readout timing and filter data to the sensor \Hypertarget{_b_m_p280_8h_a5772ec5beaed520ac8bf4d0599ebb05e}\label{_b_m_p280_8h_a5772ec5beaed520ac8bf4d0599ebb05e} 
+\index{BMP280.h@{BMP280.h}!BMP280\_Measure\_I2C@{BMP280\_Measure\_I2C}}
+\index{BMP280\_Measure\_I2C@{BMP280\_Measure\_I2C}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_Measure\_I2C()}{BMP280\_Measure\_I2C()}}
+{\footnotesize\ttfamily float BMP280\+\_\+\+Measure\+\_\+\+I2C (\begin{DoxyParamCaption}\item[{I2\+C\+\_\+\+Handle\+Type\+Def}]{i2c\+\_\+handle,  }\item[{uint8\+\_\+t}]{device\+\_\+address }\end{DoxyParamCaption})}
+
+
+
+Measure temperature and pressure over I2C. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i2c\+\_\+handle} & Desired MCU I2C peripheral for communication with sensor \\
+\hline
+{\em device\+\_\+address} & I2C device address~\newline
+BMP280\+\_\+\+DEVICE\+\_\+\+ADDRESS\+\_\+\+GND = 0x76~\newline
+BMP280\+\_\+\+DEVICE\+\_\+\+ADDRESS\+\_\+\+VDDIO = 0x77 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Measurement values 
+\end{DoxyReturn}
+\Hypertarget{_b_m_p280_8h_aac5dadd8c2f03898ed77fdb2eb77c0fd}\label{_b_m_p280_8h_aac5dadd8c2f03898ed77fdb2eb77c0fd} 
+\index{BMP280.h@{BMP280.h}!BMP280\_Wake\_I2C@{BMP280\_Wake\_I2C}}
+\index{BMP280\_Wake\_I2C@{BMP280\_Wake\_I2C}!BMP280.h@{BMP280.h}}
+\doxysubsubsection{\texorpdfstring{BMP280\_Wake\_I2C()}{BMP280\_Wake\_I2C()}}
+{\footnotesize\ttfamily bool BMP280\+\_\+\+Wake\+\_\+\+I2C (\begin{DoxyParamCaption}\item[{I2\+C\+\_\+\+Handle\+Type\+Def}]{i2c\+\_\+handle,  }\item[{uint8\+\_\+t}]{device\+\_\+address }\end{DoxyParamCaption})}
+
+
+
+Wake sensor over I2C -\/ used when measuring in forced mode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i2c\+\_\+handle} & Desired MCU I2C peripheral for communication with sensor~\newline
+\\
+\hline
+{\em device\+\_\+address} & I2C device address~\newline
+BMP280\+\_\+\+DEVICE\+\_\+\+ADDRESS\+\_\+\+GND = 0x76~\newline
+BMP280\+\_\+\+DEVICE\+\_\+\+ADDRESS\+\_\+\+VDDIO = 0x77 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Wake status~\newline
+false == unsuccessful~\newline
+true == successful
+\end{DoxyReturn}
+Wake sensor by writing MEASURE\+\_\+\+MODE\+\_\+\+FORCED bit to CTRL\+\_\+\+MEAS register 

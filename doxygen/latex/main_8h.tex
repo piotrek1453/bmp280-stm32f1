@@ -1,0 +1,93 @@
+\doxysection{Core/\+Inc/main.h File Reference}
+\hypertarget{main_8h}{}\label{main_8h}\index{Core/Inc/main.h@{Core/Inc/main.h}}
+
+
+\+: Header for \doxylink{main_8c}{main.\+c} file. This file contains the common defines of the application.  
+
+
+{\ttfamily \#include \"{}stm32f1xx\+\_\+hal.\+h\"{}}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{main_8h_aff63d3a139c37636e548bdc6b9a74dfc}{ON\+\_\+\+BOARD\+\_\+\+LED\+\_\+2\+\_\+\+Pin}}~GPIO\+\_\+\+PIN\+\_\+13
+\item 
+\#define \mbox{\hyperlink{main_8h_ab49e7227e496409eb0bd0ff53ab870ab}{ON\+\_\+\+BOARD\+\_\+\+LED\+\_\+2\+\_\+\+GPIO\+\_\+\+Port}}~GPIOC
+\item 
+\#define \mbox{\hyperlink{main_8h_aacfa31cca5cbd811cb7d7c67a65eadc7}{ON\+\_\+\+BOARD\+\_\+\+LED\+\_\+1\+\_\+\+Pin}}~GPIO\+\_\+\+PIN\+\_\+2
+\item 
+\#define \mbox{\hyperlink{main_8h_acec9bcdb883bec76d97603d752dc4061}{ON\+\_\+\+BOARD\+\_\+\+LED\+\_\+1\+\_\+\+GPIO\+\_\+\+Port}}~GPIOB
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8h_a1730ffe1e560465665eb47d9264826f9}{Error\+\_\+\+Handler}} (void)
+\begin{DoxyCompactList}\small\item\em This function is executed in case of error occurrence. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8h_abc513dd972081ae765b6949a62872eb7}{\+\_\+\+\_\+io\+\_\+putchar}} (int ch)
+\begin{DoxyCompactList}\small\item\em putchar() override -\/ redirect printf to USART2 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\+: Header for \doxylink{main_8c}{main.\+c} file. This file contains the common defines of the application. 
+
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2024 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{main_8h_acec9bcdb883bec76d97603d752dc4061}\label{main_8h_acec9bcdb883bec76d97603d752dc4061} 
+\index{main.h@{main.h}!ON\_BOARD\_LED\_1\_GPIO\_Port@{ON\_BOARD\_LED\_1\_GPIO\_Port}}
+\index{ON\_BOARD\_LED\_1\_GPIO\_Port@{ON\_BOARD\_LED\_1\_GPIO\_Port}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{ON\_BOARD\_LED\_1\_GPIO\_Port}{ON\_BOARD\_LED\_1\_GPIO\_Port}}
+{\footnotesize\ttfamily \#define ON\+\_\+\+BOARD\+\_\+\+LED\+\_\+1\+\_\+\+GPIO\+\_\+\+Port~GPIOB}
+
+\Hypertarget{main_8h_aacfa31cca5cbd811cb7d7c67a65eadc7}\label{main_8h_aacfa31cca5cbd811cb7d7c67a65eadc7} 
+\index{main.h@{main.h}!ON\_BOARD\_LED\_1\_Pin@{ON\_BOARD\_LED\_1\_Pin}}
+\index{ON\_BOARD\_LED\_1\_Pin@{ON\_BOARD\_LED\_1\_Pin}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{ON\_BOARD\_LED\_1\_Pin}{ON\_BOARD\_LED\_1\_Pin}}
+{\footnotesize\ttfamily \#define ON\+\_\+\+BOARD\+\_\+\+LED\+\_\+1\+\_\+\+Pin~GPIO\+\_\+\+PIN\+\_\+2}
+
+\Hypertarget{main_8h_ab49e7227e496409eb0bd0ff53ab870ab}\label{main_8h_ab49e7227e496409eb0bd0ff53ab870ab} 
+\index{main.h@{main.h}!ON\_BOARD\_LED\_2\_GPIO\_Port@{ON\_BOARD\_LED\_2\_GPIO\_Port}}
+\index{ON\_BOARD\_LED\_2\_GPIO\_Port@{ON\_BOARD\_LED\_2\_GPIO\_Port}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{ON\_BOARD\_LED\_2\_GPIO\_Port}{ON\_BOARD\_LED\_2\_GPIO\_Port}}
+{\footnotesize\ttfamily \#define ON\+\_\+\+BOARD\+\_\+\+LED\+\_\+2\+\_\+\+GPIO\+\_\+\+Port~GPIOC}
+
+\Hypertarget{main_8h_aff63d3a139c37636e548bdc6b9a74dfc}\label{main_8h_aff63d3a139c37636e548bdc6b9a74dfc} 
+\index{main.h@{main.h}!ON\_BOARD\_LED\_2\_Pin@{ON\_BOARD\_LED\_2\_Pin}}
+\index{ON\_BOARD\_LED\_2\_Pin@{ON\_BOARD\_LED\_2\_Pin}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{ON\_BOARD\_LED\_2\_Pin}{ON\_BOARD\_LED\_2\_Pin}}
+{\footnotesize\ttfamily \#define ON\+\_\+\+BOARD\+\_\+\+LED\+\_\+2\+\_\+\+Pin~GPIO\+\_\+\+PIN\+\_\+13}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8h_abc513dd972081ae765b6949a62872eb7}\label{main_8h_abc513dd972081ae765b6949a62872eb7} 
+\index{main.h@{main.h}!\_\_io\_putchar@{\_\_io\_putchar}}
+\index{\_\_io\_putchar@{\_\_io\_putchar}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{\_\_io\_putchar()}{\_\_io\_putchar()}}
+{\footnotesize\ttfamily int \+\_\+\+\_\+io\+\_\+putchar (\begin{DoxyParamCaption}\item[{int}]{ch }\end{DoxyParamCaption})}
+
+
+
+putchar() override -\/ redirect printf to USART2 
+
+\Hypertarget{main_8h_a1730ffe1e560465665eb47d9264826f9}\label{main_8h_a1730ffe1e560465665eb47d9264826f9} 
+\index{main.h@{main.h}!Error\_Handler@{Error\_Handler}}
+\index{Error\_Handler@{Error\_Handler}!main.h@{main.h}}
+\doxysubsubsection{\texorpdfstring{Error\_Handler()}{Error\_Handler()}}
+{\footnotesize\ttfamily void Error\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+This function is executed in case of error occurrence. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
