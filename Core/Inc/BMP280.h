@@ -165,14 +165,14 @@ float BMP280_Measure_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address);
 #define BMP280_VAL_CTRL_MEAS_OSRS_T_2 0b01000000  /**< 2x oversampling */
 #define BMP280_VAL_CTRL_MEAS_OSRS_T_4 0b01100000  /**< 4x oversampling */
 #define BMP280_VAL_CTRL_MEAS_OSRS_T_8 0b10000000  /**< 8x oversampling */
-#define BMP280_VAL_CTRL_MEAS_OSRS_T_16 0b11100000 /**< 16x oversampling */
+#define BMP280_VAL_CTRL_MEAS_OSRS_T_16 0b10100000 /**< 16x oversampling */
 
 #define BMP280_VAL_CTRL_MEAS_OSRS_P_0 0b00000000  /**< Disabled measurement */
 #define BMP280_VAL_CTRL_MEAS_OSRS_P_1 0b00000100  /**< 1x oversampling */
 #define BMP280_VAL_CTRL_MEAS_OSRS_P_2 0b00001000  /**< 2x oversampling */
 #define BMP280_VAL_CTRL_MEAS_OSRS_P_4 0b00001100  /**< 4x oversampling */
 #define BMP280_VAL_CTRL_MEAS_OSRS_P_8 0b00010000  /**< 8x oversampling */
-#define BMP280_VAL_CTRL_MEAS_OSRS_P_16 0b00011100 /**< 16x oversampling */
+#define BMP280_VAL_CTRL_MEAS_OSRS_P_16 0b00010100 /**< 16x oversampling */
 
 #define BMP280_VAL_CTRL_MEAS_MODE_SLEEP 0b00000000  /**< Sleep mode */
 #define BMP280_VAL_CTRL_MEAS_MODE_FORCED 0b00000001 /**< Forced mode */

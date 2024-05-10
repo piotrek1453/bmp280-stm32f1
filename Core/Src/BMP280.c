@@ -14,9 +14,12 @@ uint16_t dig_T1, dig_P1;
 int16_t dig_T2, dig_T3, dig_P2, dig_P3, dig_P4, dig_P5, dig_P6, dig_P7, dig_P8,
     dig_P9;
 
+static inline void BMP280_RawDataRead_I2C(I2C_HandleTypeDef i2c_handle,
+                                          uint8_t device_address);
+
 /**
- * Read constants used for temperature and pressure calculations from sensor's
- * memory
+ * Read constants used for temperature and pressure calculations from
+ * sensor's memory
  */
 //@{
 void BMP280_CalibrationConstantsRead_I2C(I2C_HandleTypeDef i2c_handle,
@@ -143,6 +146,13 @@ bool BMP280_Wake_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address) {
                   // CTRL_MEAS register
   HAL_StatusTypeDef status;
 
+  // Read device ID
+  status = HAL_I2C_Mem_Read(
+      &i2c_handle, device_address, BMP280_REG_ID, 1, &buffer, 1, HAL_MAX_DELAY);
+  if (status != HAL_OK || buffer != 0x58) {
+    return false;
+  }
+
   status = HAL_I2C_Mem_Read(&i2c_handle,
                             device_address,
                             BMP280_REG_CTRL_MEAS,
@@ -171,5 +181,33 @@ bool BMP280_Wake_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address) {
 }
 
 float BMP280_Measure_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address) {
+  BMP280_RawDataRead_I2C(i2c_handle, device_address);
   return 0.1;
+}
+
+static inline void BMP280_RawDataRead_I2C(I2C_HandleTypeDef i2c_handle,
+                                          uint8_t device_address) {
+  HAL_StatusTypeDef status;
+  uint8_t MeasurementStatus = {0}, RawData[6] = {0};
+
+  do {
+    status = HAL_I2C_Mem_Read(&i2c_handle,
+                              device_address,
+                              BMP280_REG_STATUS,
+                              1,
+                              &MeasurementStatus,
+                              1,
+                              HAL_MAX_DELAY);
+  } while (MeasurementStatus & 0b00001000);
+
+  status = HAL_I2C_Mem_Read(&i2c_handle,
+                            device_address,
+                            BMP280_REG_PRESS_MSB,
+                            1,
+                            RawData,
+                            6,
+                            HAL_MAX_DELAY);
+
+  rawTemperature = RawData[0] << 12 | RawData[1] << 4 | RawData[2] >> 4;
+  rawPressure = RawData[3] << 12 | RawData[4] << 4 | RawData[5] >> 4;
 }
