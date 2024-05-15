@@ -8,14 +8,26 @@
 
 #include "BMP280.h"
 
-int32_t rawTemperature, rawPressure;
+static int32_t rawTemperature, rawPressure;
 
-uint16_t dig_T1, dig_P1;
-int16_t dig_T2, dig_T3, dig_P2, dig_P3, dig_P4, dig_P5, dig_P6, dig_P7, dig_P8,
-    dig_P9;
+static struct BMP280_Result result;
 
-static inline void BMP280_RawDataRead_I2C(I2C_HandleTypeDef i2c_handle,
-                                          uint8_t device_address);
+static const struct BMP280_Result noResult = {0.0, 0.0};
+
+static uint16_t dig_T1, dig_P1;
+static int16_t dig_T2, dig_T3, dig_P2, dig_P3, dig_P4, dig_P5, dig_P6, dig_P7,
+    dig_P8, dig_P9;
+
+static inline HAL_StatusTypeDef
+BMP280_RawDataRead_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address);
+
+static inline int32_t BMP280_calculate_T_int32(int32_t adc_T);
+
+#if RETURN_64BIT
+static inline uint32_t BMP280_calculate_P_int64(int32_t adc_P);
+#elif RETURN_32BIT
+static inline uint32_t BMP280_calculate_P_int32(int32_t adc_P);
+#endif
 
 /**
  * Read constants used for temperature and pressure calculations from
@@ -180,13 +192,42 @@ bool BMP280_Wake_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address) {
   return true;
 }
 
-float BMP280_Measure_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address) {
-  BMP280_RawDataRead_I2C(i2c_handle, device_address);
-  return 0.1;
+struct BMP280_Result BMP280_Measure_I2C(I2C_HandleTypeDef i2c_handle,
+                                        uint8_t device_address) {
+
+  if (BMP280_RawDataRead_I2C(i2c_handle, device_address) == HAL_OK) {
+    if (rawTemperature == 0x800000) {
+      result.Temperature = 0; // value in case temp measurement was disabled
+    } else {
+      result.Temperature = (BMP280_calculate_T_int32(rawTemperature)) /
+                           100.0; // as per datasheet, the temp is x100
+    }
+
+    if (rawPressure == 0x800000)
+      result.Pressure = 0; // value in case temp measurement was disabled
+    else {
+#if SUPPORT_64BIT
+      result.Pressure = (BME280_compensate_P_int64(rawPressure)) /
+                        256.0; // as per datasheet, the pressure is x256
+
+#elif SUPPORT_32BIT
+      result.Pressure = (BME280_compensate_P_int32(
+          rawPressure)); // as per datasheet, the pressure is Pa
+
+#endif
+    }
+    return result;
+  }
+
+  // if the device is detached
+  else {
+    result.Temperature = result.Pressure = 0;
+    return noResult;
+  }
 }
 
-static inline void BMP280_RawDataRead_I2C(I2C_HandleTypeDef i2c_handle,
-                                          uint8_t device_address) {
+static inline HAL_StatusTypeDef
+BMP280_RawDataRead_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address) {
   HAL_StatusTypeDef status;
   uint8_t MeasurementStatus = {0}, RawData[6] = {0};
 
@@ -210,4 +251,83 @@ static inline void BMP280_RawDataRead_I2C(I2C_HandleTypeDef i2c_handle,
 
   rawTemperature = RawData[0] << 12 | RawData[1] << 4 | RawData[2] >> 4;
   rawPressure = RawData[3] << 12 | RawData[4] << 4 | RawData[5] >> 4;
+
+  return status;
 }
+
+/************* COMPENSATION CALCULATION AS PER DATASHEET (page 25)
+ * **************************/
+
+/* Returns temperature in DegC, resolution is 0.01 DegC. Output value of “5123”
+   equals 51.23 DegC. t_fine carries fine temperature as global value
+*/
+int32_t t_fine;
+static inline int32_t BMP280_calculate_T_int32(int32_t adc_T) {
+  int32_t var1, var2, T;
+  // compensate
+  var1 = ((((adc_T >> 3) - ((int32_t)dig_T1 << 1))) * ((int32_t)dig_T2)) >> 11;
+  var2 = (((((adc_T >> 4) - ((int32_t)dig_T1)) *
+            ((adc_T >> 4) - ((int32_t)dig_T1))) >>
+           12) *
+          ((int32_t)dig_T3)) >>
+         14;
+  t_fine = var1 + var2;
+  T = (t_fine * 5 + 128) >> 8;
+  // calculate
+  return T;
+}
+
+#if RETURN_64BIT
+/* Returns pressure in Pa as unsigned 32 bit integer in Q24.8 format (24 integer
+   bits and 8 fractional bits). Output value of “24674867” represents
+   24674867/256 = 96386.2 Pa = 963.862 hPa
+*/
+static inline uint32_t BMP280_calculate_P_int64(int32_t adc_P) {
+  int64_t var1, var2, p;
+  var1 = ((int64_t)t_fine) - 128000;
+  var2 = var1 * var1 * (int64_t)dig_P6;
+  var2 = var2 + ((var1 * (int64_t)dig_P5) << 17);
+  var2 = var2 + (((int64_t)dig_P4) << 35);
+  var1 =
+      ((var1 * var1 * (int64_t)dig_P3) >> 8) + ((var1 * (int64_t)dig_P2) << 12);
+  var1 = (((((int64_t)1) << 47) + var1)) * ((int64_t)dig_P1) >> 33;
+  if (var1 == 0) {
+    return 0; // avoid exception caused by division by zero
+  }
+  p = 1048576 - adc_P;
+  p = (((p << 31) - var2) * 3125) / var1;
+  var1 = (((int64_t)dig_P9) * (p >> 13) * (p >> 13)) >> 25;
+  var2 = (((int64_t)dig_P8) * p) >> 19;
+  p = ((p + var1 + var2) >> 8) + (((int64_t)dig_P7) << 4);
+  return (uint32_t)p;
+}
+
+#elif RETURN_32BIT
+// Returns pressure in Pa as unsigned 32 bit integer. Output value of “96386”
+// equals 96386 Pa = 963.86 hPa
+static inline uint32_t BMP280_calculate_P_int32(int32_t adc_P) {
+  int32_t var1, var2;
+  uint32_t p;
+  var1 = (((int32_t)t_fine) >> 1) - (int32_t)64000;
+  var2 = (((var1 >> 2) * (var1 >> 2)) >> 11) * ((int32_t)dig_P6);
+  var2 = var2 + ((var1 * ((int32_t)dig_P5)) << 1);
+  var2 = (var2 >> 2) + (((int32_t)dig_P4) << 16);
+  var1 = (((dig_P3 * (((var1 >> 2) * (var1 >> 2)) >> 13)) >> 3) +
+          ((((int32_t)dig_P2) * var1) >> 1)) >>
+         18;
+  var1 = ((((32768 + var1)) * ((int32_t)dig_P1)) >> 15);
+  if (var1 == 0) {
+    return 0; // avoid exception caused by division by zero
+  }
+  p = (((uint32_t)(((int32_t)1048576) - adc_P) - (var2 >> 12))) * 3125;
+  if (p < 0x80000000) {
+    p = (p << 1) / ((uint32_t)var1);
+  } else {
+    p = (p / (uint32_t)var1) * 2;
+  }
+  var1 = (((int32_t)dig_P9) * ((int32_t)(((p >> 3) * (p >> 3)) >> 13))) >> 12;
+  var2 = (((int32_t)(p >> 2)) * ((int32_t)dig_P8)) >> 13;
+  p = (uint32_t)((int32_t)p + ((var1 + var2 + dig_P7) >> 4));
+  return p;
+}
+#endif

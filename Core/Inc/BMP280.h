@@ -11,6 +11,10 @@
 #include "stm32f1xx_hal.h"
 #include <stdbool.h>
 
+typedef struct BMP280_Result {
+  float Temperature, Pressure;
+} BMP280_Result;
+
 /**
  * @brief Initialize sensor with chosen settings
  * @param osrs_t Temperature oversampling setting
@@ -60,7 +64,8 @@ bool BMP280_Wake_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address);
  * BMP280_DEVICE_ADDRESS_VDDIO = 0x77
  * @return Measurement values
  */
-float BMP280_Measure_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address);
+struct BMP280_Result BMP280_Measure_I2C(I2C_HandleTypeDef i2c_handle,
+                                        uint8_t device_address);
 
 /**
  * \name Sensor I2C addresses
@@ -160,38 +165,38 @@ float BMP280_Measure_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address);
 /**
  * \name Valid CTRL_MEAS register acquisition option values
  */
-#define BMP280_VAL_CTRL_MEAS_OSRS_T_0 0b00000000  /**< Disabled measurement */
-#define BMP280_VAL_CTRL_MEAS_OSRS_T_1 0b00100000  /**< 1x oversampling */
-#define BMP280_VAL_CTRL_MEAS_OSRS_T_2 0b01000000  /**< 2x oversampling */
-#define BMP280_VAL_CTRL_MEAS_OSRS_T_4 0b01100000  /**< 4x oversampling */
-#define BMP280_VAL_CTRL_MEAS_OSRS_T_8 0b10000000  /**< 8x oversampling */
-#define BMP280_VAL_CTRL_MEAS_OSRS_T_16 0b10100000 /**< 16x oversampling */
+#define BMP280_VAL_CTRL_MEAS_OSRS_T_0 0x00  /**< Disabled measurement */
+#define BMP280_VAL_CTRL_MEAS_OSRS_T_1 0x01  /**< 1x oversampling */
+#define BMP280_VAL_CTRL_MEAS_OSRS_T_2 0x02  /**< 2x oversampling */
+#define BMP280_VAL_CTRL_MEAS_OSRS_T_4 0x03  /**< 4x oversampling */
+#define BMP280_VAL_CTRL_MEAS_OSRS_T_8 0x04  /**< 8x oversampling */
+#define BMP280_VAL_CTRL_MEAS_OSRS_T_16 0x05 /**< 16x oversampling */
 
-#define BMP280_VAL_CTRL_MEAS_OSRS_P_0 0b00000000  /**< Disabled measurement */
-#define BMP280_VAL_CTRL_MEAS_OSRS_P_1 0b00000100  /**< 1x oversampling */
-#define BMP280_VAL_CTRL_MEAS_OSRS_P_2 0b00001000  /**< 2x oversampling */
-#define BMP280_VAL_CTRL_MEAS_OSRS_P_4 0b00001100  /**< 4x oversampling */
-#define BMP280_VAL_CTRL_MEAS_OSRS_P_8 0b00010000  /**< 8x oversampling */
-#define BMP280_VAL_CTRL_MEAS_OSRS_P_16 0b00010100 /**< 16x oversampling */
+#define BMP280_VAL_CTRL_MEAS_OSRS_P_0 0x00  /**< Disabled measurement */
+#define BMP280_VAL_CTRL_MEAS_OSRS_P_1 0x01  /**< 1x oversampling */
+#define BMP280_VAL_CTRL_MEAS_OSRS_P_2 0x02  /**< 2x oversampling */
+#define BMP280_VAL_CTRL_MEAS_OSRS_P_4 0x03  /**< 4x oversampling */
+#define BMP280_VAL_CTRL_MEAS_OSRS_P_8 0x04  /**< 8x oversampling */
+#define BMP280_VAL_CTRL_MEAS_OSRS_P_16 0x05 /**< 16x oversampling */
 
-#define BMP280_VAL_CTRL_MEAS_MODE_SLEEP 0b00000000  /**< Sleep mode */
-#define BMP280_VAL_CTRL_MEAS_MODE_FORCED 0b00000001 /**< Forced mode */
-#define BMP280_VAL_CTRL_MEAS_MODE_NORMAL 0b00000011 /**< Continuous mode */
+#define BMP280_VAL_CTRL_MEAS_MODE_SLEEP 0x00  /**< Sleep mode */
+#define BMP280_VAL_CTRL_MEAS_MODE_FORCED 0x01 /**< Forced mode */
+#define BMP280_VAL_CTRL_MEAS_MODE_NORMAL 0x03 /**< Continuous mode */
 
-#define BMP280_VAL_CTRL_CONFIG_T_SB_0_5 0b00000000  /**< Standby 0.5ms */
-#define BMP280_VAL_CTRL_CONFIG_T_SB_62_5 0b00100000 /**< Standby 62.25ms */
-#define BMP280_VAL_CTRL_CONFIG_T_SB_125 0b01000000  /**< Standby 125ms */
-#define BMP280_VAL_CTRL_CONFIG_T_SB_250 0b01100000  /**< Standby 250ms */
-#define BMP280_VAL_CTRL_CONFIG_T_SB_500 0b10000000  /**< Standby 500ms */
-#define BMP280_VAL_CTRL_CONFIG_T_SB_1000 0b10100000 /**< Standby 1000ms */
-#define BMP280_VAL_CTRL_CONFIG_T_SB_2000 0b11000000 /**< Standby 2000ms */
-#define BMP280_VAL_CTRL_CONFIG_T_SB_4000 0b11100000 /**< Standby 4000ms */
+#define BMP280_VAL_CTRL_CONFIG_T_SB_0_5 0x00  /**< Standby 0.5ms */
+#define BMP280_VAL_CTRL_CONFIG_T_SB_62_5 0x01 /**< Standby 62.25ms */
+#define BMP280_VAL_CTRL_CONFIG_T_SB_125 0x02  /**< Standby 125ms */
+#define BMP280_VAL_CTRL_CONFIG_T_SB_250 0x03  /**< Standby 250ms */
+#define BMP280_VAL_CTRL_CONFIG_T_SB_500 0x04  /**< Standby 500ms */
+#define BMP280_VAL_CTRL_CONFIG_T_SB_1000 0x05 /**< Standby 1000ms */
+#define BMP280_VAL_CTRL_CONFIG_T_SB_2000 0x06 /**< Standby 2000ms */
+#define BMP280_VAL_CTRL_CONFIG_T_SB_4000 0x07 /**< Standby 4000ms */
 
-#define BMP280_VAL_CTRL_CONFIG_FILTER_0 0b00000000  /**< Filter disabled */
-#define BMP280_VAL_CTRL_CONFIG_FILTER_2 0b00000100  /**< 2x filter */
-#define BMP280_VAL_CTRL_CONFIG_FILTER_4 0b00001000  /**< 4x filter */
-#define BMP280_VAL_CTRL_CONFIG_FILTER_8 0b00001100  /**< 8x filter */
-#define BMP280_VAL_CTRL_CONFIG_FILTER_16 0b00010000 /**< 16x filter */
+#define BMP280_VAL_CTRL_CONFIG_FILTER_0 0x00  /**< Filter disabled */
+#define BMP280_VAL_CTRL_CONFIG_FILTER_2 0x01  /**< 2x filter */
+#define BMP280_VAL_CTRL_CONFIG_FILTER_4 0x02  /**< 4x filter */
+#define BMP280_VAL_CTRL_CONFIG_FILTER_8 0x03  /**< 8x filter */
+#define BMP280_VAL_CTRL_CONFIG_FILTER_16 0x04 /**< 16x filter */
 
 #define BMP280_VAL_CTRL_SPI3W_EN 0b00000001 /**< Enable SPI 3-wire */
 

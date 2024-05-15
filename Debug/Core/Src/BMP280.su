@@ -1,5 +1,6 @@
-../Core/Src/BMP280.c:25:6:BMP280_CalibrationConstantsRead_I2C	56	static
-../Core/Src/BMP280.c:58:6:BMP280_Init_I2C	104	static
-../Core/Src/BMP280.c:144:6:BMP280_Wake_I2C	32	static
-../Core/Src/BMP280.c:183:7:BMP280_Measure_I2C	80	static
-../Core/Src/BMP280.c:188:20:BMP280_RawDataRead_I2C	32	static
+../Core/Src/BMP280.c:37:6:BMP280_CalibrationConstantsRead_I2C	56	static
+../Core/Src/BMP280.c:70:6:BMP280_Init_I2C	104	static
+../Core/Src/BMP280.c:156:6:BMP280_Wake_I2C	32	static
+../Core/Src/BMP280.c:195:22:BMP280_Measure_I2C	88	static
+../Core/Src/BMP280.c:230:1:BMP280_RawDataRead_I2C	32	static
+../Core/Src/BMP280.c:265:23:BMP280_calculate_T_int32	32	static

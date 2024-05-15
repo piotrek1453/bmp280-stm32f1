@@ -65,7 +65,7 @@ main-build: bmp280-stm32f1.elf secondary-outputs
 
 # Tool invocations
 bmp280-stm32f1.elf bmp280-stm32f1.map: $(OBJS) $(USER_OBJS) D:\STM32\programy\bmp280-stm32f1\bmp280-stm32f1\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "bmp280-stm32f1.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"D:\STM32\programy\bmp280-stm32f1\bmp280-stm32f1\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="bmp280-stm32f1.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "bmp280-stm32f1.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"D:\STM32\programy\bmp280-stm32f1\bmp280-stm32f1\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="bmp280-stm32f1.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

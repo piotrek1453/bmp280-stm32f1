@@ -68,7 +68,6 @@ void MX_FREERTOS_Init(void);
 int main(void) {
 
   /* USER CODE BEGIN 1 */
-
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -98,14 +97,9 @@ int main(void) {
                   BMP280_VAL_CTRL_MEAS_OSRS_P_1,
                   BMP280_VAL_CTRL_MEAS_MODE_NORMAL,
                   BMP280_VAL_CTRL_CONFIG_T_SB_0_5,
-                  BMP280_VAL_CTRL_CONFIG_FILTER_16,
+                  BMP280_VAL_CTRL_CONFIG_FILTER_0,
                   hi2c1,
                   BMP280_DEVICE_ADDRESS_GND);
-  // BMP280_Wake_I2C(hi2c1, BMP280_DEVICE_ADDRESS_GND);
-  // HAL_Delay(5000);
-  for (uint8_t i = 0; i < 10; ++i) {
-    BMP280_Measure_I2C(hi2c1, BMP280_DEVICE_ADDRESS_GND);
-  }
   /* USER CODE END 2 */
 
   /* Init scheduler */
