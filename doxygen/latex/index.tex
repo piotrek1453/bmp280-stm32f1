@@ -6,4 +6,19 @@
 
 Simple BMP280 driver embedded in example configured STM32\+Cube\+IDE project for STM32\+F103.
 
-It should work with any STM32 MCU after replacing \"{}\#include \"{}stm32f1xx\+\_\+hal.\+h\"{}\"{} in \doxylink{_b_m_p280_8h}{BMP280.\+h} with correct one. 
+It should work with any STM32 MCU after replacing \"{}\#include \"{}stm32f1xx\+\_\+hal.\+h\"{}\"{} in \doxylink{_b_m_p280_8h}{BMP280.\+h} with correct one.\hypertarget{index_autotoc_md1}{}\doxysection{\texorpdfstring{Wiring}{Wiring}}\label{index_autotoc_md1}
+For this code to run \"{}out of the box\"{} you need an STM32\+F103 and BMP280 sensor connected as follows\+:
+
+Sensor\texorpdfstring{$<$}{<}-\/\texorpdfstring{$>$}{>}MCU
+
+VCC \texorpdfstring{$<$}{<}-\/\texorpdfstring{$>$}{>} 3V3
+
+GND\texorpdfstring{$<$}{<}-\/\texorpdfstring{$>$}{>}GND
+
+SCL\texorpdfstring{$<$}{<}-\/\texorpdfstring{$>$}{>}B6 (I2\+C1 clock)
+
+SDA\texorpdfstring{$<$}{<}-\/\texorpdfstring{$>$}{>}B7 (I2\+C1 data)
+
+CSB\texorpdfstring{$<$}{<}-\/\texorpdfstring{$>$}{>}3V3 (Disable SPI on sensor)
+
+SDD\texorpdfstring{$<$}{<}-\/\texorpdfstring{$>$}{>}GND (Set sensor address to 0x76) 

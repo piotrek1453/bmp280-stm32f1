@@ -46,7 +46,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+uint8_t valueTest_BMP280[6] = {0};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -93,11 +93,32 @@ int main(void) {
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   printf("System initializing\r\n");
-  BMP280_Init_I2C(BMP280_VAL_CTRL_MEAS_OSRS_T_1,
-                  BMP280_VAL_CTRL_MEAS_OSRS_P_1,
+
+  uint8_t reset_val = BMP280_VAL_RESET;
+  HAL_I2C_Mem_Write(&hi2c1,
+                    BMP280_DEVICE_ADDRESS_GND,
+                    BMP280_REG_RESET,
+                    1,
+                    &reset_val,
+                    1,
+                    HAL_MAX_DELAY);
+  HAL_I2C_Mem_Read(&hi2c1,
+                   BMP280_DEVICE_ADDRESS_GND,
+                   BMP280_REG_PRESS_MSB,
+                   1,
+                   valueTest_BMP280,
+                   6,
+                   HAL_MAX_DELAY);
+  printf("Init values:\r\n");
+  for (uint8_t i = 0; i < 6; ++i) {
+    printf("%x\r\n", valueTest_BMP280[i]);
+  }
+
+  BMP280_Init_I2C(BMP280_VAL_CTRL_MEAS_OSRS_T_0,
+                  BMP280_VAL_CTRL_MEAS_OSRS_P_16,
                   BMP280_VAL_CTRL_MEAS_MODE_NORMAL,
                   BMP280_VAL_CTRL_CONFIG_T_SB_0_5,
-                  BMP280_VAL_CTRL_CONFIG_FILTER_0,
+                  BMP280_VAL_CTRL_CONFIG_FILTER_16,
                   hi2c1,
                   BMP280_DEVICE_ADDRESS_GND);
   /* USER CODE END 2 */

@@ -71,8 +71,12 @@ struct BMP280_Result BMP280_Measure_I2C(I2C_HandleTypeDef i2c_handle,
  * \name Sensor I2C addresses
  */
 //@{
-#define BMP280_DEVICE_ADDRESS_GND 0x76 << 1   /**< Used when SDO pulled down */
-#define BMP280_DEVICE_ADDRESS_VDDIO 0x77 << 1 /**< Used when SDO pulled up */
+#define BMP280_DEVICE_ADDRESS_GND                                              \
+  (0x76 << 1) /**< Used when SDO pulled down                                   \
+               */
+#define BMP280_DEVICE_ADDRESS_VDDIO                                            \
+  (0x77 << 1) /**< Used when SDO pulled up                                     \
+               */
 //@}
 
 /**
@@ -204,8 +208,8 @@ struct BMP280_Result BMP280_Measure_I2C(I2C_HandleTypeDef i2c_handle,
  * \name MCU specific setting - affects pressure processing formula
  */
 //@{
-#define RETURN_64BIT true  /**< for MCU with 64-bit operations support */
-#define RETURN_32BIT false /**< for MCU without 64-bit operations support */
+#define RETURN_64BIT true /**< for MCU with 64-bit operations support */
+#define RETURN_32BIT false  /**< for MCU without 64-bit operations support */
                            //@}
 
 /* INC_BMP280_H_ */

@@ -74,7 +74,17 @@ $(function() {
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md__r_e_a_d_m_e"></a></p>
 <p>Simple BMP280 driver embedded in example configured STM32CubeIDE project for STM32F103.</p>
-<p>It should work with any STM32 MCU after replacing "#include "stm32f1xx_hal.h"" in <a class="el" href="_b_m_p280_8h.html" title="BMP280 driver file header.">BMP280.h</a> with correct one. </p>
+<p>It should work with any STM32 MCU after replacing "#include "stm32f1xx_hal.h"" in <a class="el" href="_b_m_p280_8h.html" title="BMP280 driver file header.">BMP280.h</a> with correct one.</p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Wiring</h1>
+<p>For this code to run "out of the box" you need an STM32F103 and BMP280 sensor connected as follows:</p>
+<p>Sensor&lt;-&gt;MCU</p>
+<p>VCC &lt;-&gt; 3V3</p>
+<p>GND&lt;-&gt;GND</p>
+<p>SCL&lt;-&gt;B6 (I2C1 clock)</p>
+<p>SDA&lt;-&gt;B7 (I2C1 data)</p>
+<p>CSB&lt;-&gt;3V3 (Disable SPI on sensor)</p>
+<p>SDD&lt;-&gt;GND (Set sensor address to 0x76) </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->

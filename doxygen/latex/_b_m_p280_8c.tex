@@ -15,38 +15,12 @@ bool \mbox{\hyperlink{_b_m_p280_8c_a9017ca1c3d95ac8a0a3b96693a425312}{BMP280\+\_
 \begin{DoxyCompactList}\small\item\em Initialize sensor with chosen settings. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{_b_m_p280_8c_aac5dadd8c2f03898ed77fdb2eb77c0fd}{BMP280\+\_\+\+Wake\+\_\+\+I2C}} (I2\+C\+\_\+\+Handle\+Type\+Def i2c\+\_\+handle, uint8\+\_\+t device\+\_\+address)
 \begin{DoxyCompactList}\small\item\em Wake sensor over I2C -\/ used when measuring in forced mode. \end{DoxyCompactList}\item 
-float \mbox{\hyperlink{_b_m_p280_8c_a5772ec5beaed520ac8bf4d0599ebb05e}{BMP280\+\_\+\+Measure\+\_\+\+I2C}} (I2\+C\+\_\+\+Handle\+Type\+Def i2c\+\_\+handle, uint8\+\_\+t device\+\_\+address)
+struct \mbox{\hyperlink{struct_b_m_p280___result}{BMP280\+\_\+\+Result}} \mbox{\hyperlink{_b_m_p280_8c_a3ba1d44816edfca8c80d1f49c6b9d644}{BMP280\+\_\+\+Measure\+\_\+\+I2C}} (I2\+C\+\_\+\+Handle\+Type\+Def i2c\+\_\+handle, uint8\+\_\+t device\+\_\+address)
 \begin{DoxyCompactList}\small\item\em Measure temperature and pressure over I2C. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-int32\+\_\+t \mbox{\hyperlink{_b_m_p280_8c_aadd6b6079d5dff0f1ebe907cdc0c8b9a}{raw\+Temperature}}
-\item 
-int32\+\_\+t \mbox{\hyperlink{_b_m_p280_8c_aa028c2f6e88e08f046fc2ed2a32f49e5}{raw\+Pressure}}
-\item 
-uint16\+\_\+t \mbox{\hyperlink{_b_m_p280_8c_a730ed166c629bded674b13faffe9cef7}{dig\+\_\+\+T1}}
-\item 
-uint16\+\_\+t \mbox{\hyperlink{_b_m_p280_8c_a14cb8cb6405f1dbd7b96eacb1564f3ac}{dig\+\_\+\+P1}}
-\item 
-int16\+\_\+t \mbox{\hyperlink{_b_m_p280_8c_ab5c023a004c0497ba616d916155c85bb}{dig\+\_\+\+T2}}
-\item 
-int16\+\_\+t \mbox{\hyperlink{_b_m_p280_8c_a9536e89c30bbd791153ac9e407b0752b}{dig\+\_\+\+T3}}
-\item 
-int16\+\_\+t \mbox{\hyperlink{_b_m_p280_8c_abf2720ad17acc224ed28e66ec3de32ed}{dig\+\_\+\+P2}}
-\item 
-int16\+\_\+t \mbox{\hyperlink{_b_m_p280_8c_a16db1b4967cfd3dc34219d8fb8c92aeb}{dig\+\_\+\+P3}}
-\item 
-int16\+\_\+t \mbox{\hyperlink{_b_m_p280_8c_a9c7db64a28b0e240d0478921741dd67d}{dig\+\_\+\+P4}}
-\item 
-int16\+\_\+t \mbox{\hyperlink{_b_m_p280_8c_a7e509836d7ae0753ceaaed354b5e1479}{dig\+\_\+\+P5}}
-\item 
-int16\+\_\+t \mbox{\hyperlink{_b_m_p280_8c_a2ae5570c6daeda1d3666ed3dad96c4b7}{dig\+\_\+\+P6}}
-\item 
-int16\+\_\+t \mbox{\hyperlink{_b_m_p280_8c_a7f3c3b4bc3acd51c35229dd2cc50a3d6}{dig\+\_\+\+P7}}
-\item 
-int16\+\_\+t \mbox{\hyperlink{_b_m_p280_8c_a40493b036281e2b5fdfdf1776fe4708a}{dig\+\_\+\+P8}}
-\item 
-int16\+\_\+t \mbox{\hyperlink{_b_m_p280_8c_a361620dc95ad1d56b5d416d9d290c5f4}{dig\+\_\+\+P9}}
+int32\+\_\+t \mbox{\hyperlink{_b_m_p280_8c_ac1f0d71206317758c70cd96314b6fc02}{t\+\_\+fine}}
 \end{DoxyCompactItemize}
 
 
@@ -77,11 +51,11 @@ Read constants used for temperature and pressure calculations from sensor\textqu
 
 Initialize sensor with chosen settings. 
 
-Reset the sensor, check if device ID is valid, read calibration constants, write oversampling, acquisition mode, readout timing and filter data to the sensor \Hypertarget{_b_m_p280_8c_a5772ec5beaed520ac8bf4d0599ebb05e}\label{_b_m_p280_8c_a5772ec5beaed520ac8bf4d0599ebb05e} 
+Reset the sensor, check if device ID is valid, read calibration constants, write oversampling, acquisition mode, readout timing and filter data to the sensor \Hypertarget{_b_m_p280_8c_a3ba1d44816edfca8c80d1f49c6b9d644}\label{_b_m_p280_8c_a3ba1d44816edfca8c80d1f49c6b9d644} 
 \index{BMP280.c@{BMP280.c}!BMP280\_Measure\_I2C@{BMP280\_Measure\_I2C}}
 \index{BMP280\_Measure\_I2C@{BMP280\_Measure\_I2C}!BMP280.c@{BMP280.c}}
 \doxysubsubsection{\texorpdfstring{BMP280\_Measure\_I2C()}{BMP280\_Measure\_I2C()}}
-{\footnotesize\ttfamily float BMP280\+\_\+\+Measure\+\_\+\+I2C (\begin{DoxyParamCaption}\item[{I2\+C\+\_\+\+Handle\+Type\+Def}]{i2c\+\_\+handle,  }\item[{uint8\+\_\+t}]{device\+\_\+address }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_b_m_p280___result}{BMP280\+\_\+\+Result}} BMP280\+\_\+\+Measure\+\_\+\+I2C (\begin{DoxyParamCaption}\item[{I2\+C\+\_\+\+Handle\+Type\+Def}]{i2c\+\_\+handle,  }\item[{uint8\+\_\+t}]{device\+\_\+address }\end{DoxyParamCaption})}
 
 
 
@@ -112,87 +86,9 @@ Wake sensor over I2C -\/ used when measuring in forced mode.
 Wake sensor by writing MEASURE\+\_\+\+MODE\+\_\+\+FORCED bit to CTRL\+\_\+\+MEAS register 
 
 \doxysubsection{Variable Documentation}
-\Hypertarget{_b_m_p280_8c_a14cb8cb6405f1dbd7b96eacb1564f3ac}\label{_b_m_p280_8c_a14cb8cb6405f1dbd7b96eacb1564f3ac} 
-\index{BMP280.c@{BMP280.c}!dig\_P1@{dig\_P1}}
-\index{dig\_P1@{dig\_P1}!BMP280.c@{BMP280.c}}
-\doxysubsubsection{\texorpdfstring{dig\_P1}{dig\_P1}}
-{\footnotesize\ttfamily uint16\+\_\+t dig\+\_\+\+P1}
-
-\Hypertarget{_b_m_p280_8c_abf2720ad17acc224ed28e66ec3de32ed}\label{_b_m_p280_8c_abf2720ad17acc224ed28e66ec3de32ed} 
-\index{BMP280.c@{BMP280.c}!dig\_P2@{dig\_P2}}
-\index{dig\_P2@{dig\_P2}!BMP280.c@{BMP280.c}}
-\doxysubsubsection{\texorpdfstring{dig\_P2}{dig\_P2}}
-{\footnotesize\ttfamily int16\+\_\+t dig\+\_\+\+P2}
-
-\Hypertarget{_b_m_p280_8c_a16db1b4967cfd3dc34219d8fb8c92aeb}\label{_b_m_p280_8c_a16db1b4967cfd3dc34219d8fb8c92aeb} 
-\index{BMP280.c@{BMP280.c}!dig\_P3@{dig\_P3}}
-\index{dig\_P3@{dig\_P3}!BMP280.c@{BMP280.c}}
-\doxysubsubsection{\texorpdfstring{dig\_P3}{dig\_P3}}
-{\footnotesize\ttfamily int16\+\_\+t dig\+\_\+\+P3}
-
-\Hypertarget{_b_m_p280_8c_a9c7db64a28b0e240d0478921741dd67d}\label{_b_m_p280_8c_a9c7db64a28b0e240d0478921741dd67d} 
-\index{BMP280.c@{BMP280.c}!dig\_P4@{dig\_P4}}
-\index{dig\_P4@{dig\_P4}!BMP280.c@{BMP280.c}}
-\doxysubsubsection{\texorpdfstring{dig\_P4}{dig\_P4}}
-{\footnotesize\ttfamily int16\+\_\+t dig\+\_\+\+P4}
-
-\Hypertarget{_b_m_p280_8c_a7e509836d7ae0753ceaaed354b5e1479}\label{_b_m_p280_8c_a7e509836d7ae0753ceaaed354b5e1479} 
-\index{BMP280.c@{BMP280.c}!dig\_P5@{dig\_P5}}
-\index{dig\_P5@{dig\_P5}!BMP280.c@{BMP280.c}}
-\doxysubsubsection{\texorpdfstring{dig\_P5}{dig\_P5}}
-{\footnotesize\ttfamily int16\+\_\+t dig\+\_\+\+P5}
-
-\Hypertarget{_b_m_p280_8c_a2ae5570c6daeda1d3666ed3dad96c4b7}\label{_b_m_p280_8c_a2ae5570c6daeda1d3666ed3dad96c4b7} 
-\index{BMP280.c@{BMP280.c}!dig\_P6@{dig\_P6}}
-\index{dig\_P6@{dig\_P6}!BMP280.c@{BMP280.c}}
-\doxysubsubsection{\texorpdfstring{dig\_P6}{dig\_P6}}
-{\footnotesize\ttfamily int16\+\_\+t dig\+\_\+\+P6}
-
-\Hypertarget{_b_m_p280_8c_a7f3c3b4bc3acd51c35229dd2cc50a3d6}\label{_b_m_p280_8c_a7f3c3b4bc3acd51c35229dd2cc50a3d6} 
-\index{BMP280.c@{BMP280.c}!dig\_P7@{dig\_P7}}
-\index{dig\_P7@{dig\_P7}!BMP280.c@{BMP280.c}}
-\doxysubsubsection{\texorpdfstring{dig\_P7}{dig\_P7}}
-{\footnotesize\ttfamily int16\+\_\+t dig\+\_\+\+P7}
-
-\Hypertarget{_b_m_p280_8c_a40493b036281e2b5fdfdf1776fe4708a}\label{_b_m_p280_8c_a40493b036281e2b5fdfdf1776fe4708a} 
-\index{BMP280.c@{BMP280.c}!dig\_P8@{dig\_P8}}
-\index{dig\_P8@{dig\_P8}!BMP280.c@{BMP280.c}}
-\doxysubsubsection{\texorpdfstring{dig\_P8}{dig\_P8}}
-{\footnotesize\ttfamily int16\+\_\+t dig\+\_\+\+P8}
-
-\Hypertarget{_b_m_p280_8c_a361620dc95ad1d56b5d416d9d290c5f4}\label{_b_m_p280_8c_a361620dc95ad1d56b5d416d9d290c5f4} 
-\index{BMP280.c@{BMP280.c}!dig\_P9@{dig\_P9}}
-\index{dig\_P9@{dig\_P9}!BMP280.c@{BMP280.c}}
-\doxysubsubsection{\texorpdfstring{dig\_P9}{dig\_P9}}
-{\footnotesize\ttfamily int16\+\_\+t dig\+\_\+\+P9}
-
-\Hypertarget{_b_m_p280_8c_a730ed166c629bded674b13faffe9cef7}\label{_b_m_p280_8c_a730ed166c629bded674b13faffe9cef7} 
-\index{BMP280.c@{BMP280.c}!dig\_T1@{dig\_T1}}
-\index{dig\_T1@{dig\_T1}!BMP280.c@{BMP280.c}}
-\doxysubsubsection{\texorpdfstring{dig\_T1}{dig\_T1}}
-{\footnotesize\ttfamily uint16\+\_\+t dig\+\_\+\+T1}
-
-\Hypertarget{_b_m_p280_8c_ab5c023a004c0497ba616d916155c85bb}\label{_b_m_p280_8c_ab5c023a004c0497ba616d916155c85bb} 
-\index{BMP280.c@{BMP280.c}!dig\_T2@{dig\_T2}}
-\index{dig\_T2@{dig\_T2}!BMP280.c@{BMP280.c}}
-\doxysubsubsection{\texorpdfstring{dig\_T2}{dig\_T2}}
-{\footnotesize\ttfamily int16\+\_\+t dig\+\_\+\+T2}
-
-\Hypertarget{_b_m_p280_8c_a9536e89c30bbd791153ac9e407b0752b}\label{_b_m_p280_8c_a9536e89c30bbd791153ac9e407b0752b} 
-\index{BMP280.c@{BMP280.c}!dig\_T3@{dig\_T3}}
-\index{dig\_T3@{dig\_T3}!BMP280.c@{BMP280.c}}
-\doxysubsubsection{\texorpdfstring{dig\_T3}{dig\_T3}}
-{\footnotesize\ttfamily int16\+\_\+t dig\+\_\+\+T3}
-
-\Hypertarget{_b_m_p280_8c_aa028c2f6e88e08f046fc2ed2a32f49e5}\label{_b_m_p280_8c_aa028c2f6e88e08f046fc2ed2a32f49e5} 
-\index{BMP280.c@{BMP280.c}!rawPressure@{rawPressure}}
-\index{rawPressure@{rawPressure}!BMP280.c@{BMP280.c}}
-\doxysubsubsection{\texorpdfstring{rawPressure}{rawPressure}}
-{\footnotesize\ttfamily int32\+\_\+t raw\+Pressure}
-
-\Hypertarget{_b_m_p280_8c_aadd6b6079d5dff0f1ebe907cdc0c8b9a}\label{_b_m_p280_8c_aadd6b6079d5dff0f1ebe907cdc0c8b9a} 
-\index{BMP280.c@{BMP280.c}!rawTemperature@{rawTemperature}}
-\index{rawTemperature@{rawTemperature}!BMP280.c@{BMP280.c}}
-\doxysubsubsection{\texorpdfstring{rawTemperature}{rawTemperature}}
-{\footnotesize\ttfamily int32\+\_\+t raw\+Temperature}
+\Hypertarget{_b_m_p280_8c_ac1f0d71206317758c70cd96314b6fc02}\label{_b_m_p280_8c_ac1f0d71206317758c70cd96314b6fc02} 
+\index{BMP280.c@{BMP280.c}!t\_fine@{t\_fine}}
+\index{t\_fine@{t\_fine}!BMP280.c@{BMP280.c}}
+\doxysubsubsection{\texorpdfstring{t\_fine}{t\_fine}}
+{\footnotesize\ttfamily int32\+\_\+t t\+\_\+fine}
 

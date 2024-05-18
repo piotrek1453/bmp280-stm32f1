@@ -59,6 +59,7 @@ void BMP280_CalibrationConstantsRead_I2C(I2C_HandleTypeDef i2c_handle,
   dig_P7 = calibrationConstantsRaw[18] | calibrationConstantsRaw[19] << 8;
   dig_P8 = calibrationConstantsRaw[20] | calibrationConstantsRaw[21] << 8;
   dig_P9 = calibrationConstantsRaw[22] | calibrationConstantsRaw[23] << 8;
+
 } //@}
 
 /**
@@ -196,22 +197,22 @@ struct BMP280_Result BMP280_Measure_I2C(I2C_HandleTypeDef i2c_handle,
                                         uint8_t device_address) {
 
   if (BMP280_RawDataRead_I2C(i2c_handle, device_address) == HAL_OK) {
-    if (rawTemperature == 0x800000) {
+    if (rawTemperature == 0x80000) {
       result.Temperature = 0; // value in case temp measurement was disabled
     } else {
       result.Temperature = (BMP280_calculate_T_int32(rawTemperature)) /
                            100.0; // as per datasheet, the temp is x100
     }
 
-    if (rawPressure == 0x800000)
+    if (rawPressure == 0x80000)
       result.Pressure = 0; // value in case temp measurement was disabled
     else {
-#if SUPPORT_64BIT
-      result.Pressure = (BME280_compensate_P_int64(rawPressure)) /
+#if RETURN_64BIT
+      result.Pressure = (BMP280_calculate_P_int64(rawPressure)) /
                         256.0; // as per datasheet, the pressure is x256
 
-#elif SUPPORT_32BIT
-      result.Pressure = (BME280_compensate_P_int32(
+#elif RETURN_32BIT
+      result.Pressure = (BMP280_calculate_P_int32(
           rawPressure)); // as per datasheet, the pressure is Pa
 
 #endif
@@ -221,7 +222,6 @@ struct BMP280_Result BMP280_Measure_I2C(I2C_HandleTypeDef i2c_handle,
 
   // if the device is detached
   else {
-    result.Temperature = result.Pressure = 0;
     return noResult;
   }
 }
@@ -239,7 +239,7 @@ BMP280_RawDataRead_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address) {
                               &MeasurementStatus,
                               1,
                               HAL_MAX_DELAY);
-  } while (MeasurementStatus & 0b00001000);
+  } while (MeasurementStatus & 0b00001000); // Wait for measurement to finish
 
   status = HAL_I2C_Mem_Read(&i2c_handle,
                             device_address,
@@ -249,8 +249,8 @@ BMP280_RawDataRead_I2C(I2C_HandleTypeDef i2c_handle, uint8_t device_address) {
                             6,
                             HAL_MAX_DELAY);
 
-  rawTemperature = RawData[0] << 12 | RawData[1] << 4 | RawData[2] >> 4;
-  rawPressure = RawData[3] << 12 | RawData[4] << 4 | RawData[5] >> 4;
+  rawPressure = RawData[0] << 12 | RawData[1] << 4 | RawData[2] >> 4;
+  rawTemperature = RawData[3] << 12 | RawData[4] << 4 | RawData[5] >> 4;
 
   return status;
 }

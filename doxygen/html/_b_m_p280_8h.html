@@ -74,6 +74,8 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Data Structures</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">BMP280.h File Reference</div></div>
 </div><!--header-->
@@ -84,12 +86,17 @@ $(function() {
 <div class="textblock"><code>#include &quot;stm32f1xx_hal.h&quot;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_b_m_p280___result.html">BMP280_Result</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Sensor I2C addresses</div></td></tr>
-<tr class="memitem:a468c31ab40f4b1c1c0969f27a7b08a8d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a468c31ab40f4b1c1c0969f27a7b08a8d">BMP280_DEVICE_ADDRESS_GND</a>&#160;&#160;&#160;0x76 &lt;&lt; 1</td></tr>
+<tr class="memitem:a468c31ab40f4b1c1c0969f27a7b08a8d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a468c31ab40f4b1c1c0969f27a7b08a8d">BMP280_DEVICE_ADDRESS_GND</a>&#160;&#160;&#160;  (0x76 &lt;&lt; 1)</td></tr>
 <tr class="separator:a468c31ab40f4b1c1c0969f27a7b08a8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb76c0f71c1f084869ac41aa5b0fbb97"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#adb76c0f71c1f084869ac41aa5b0fbb97">BMP280_DEVICE_ADDRESS_VDDIO</a>&#160;&#160;&#160;0x77 &lt;&lt; 1</td></tr>
+<tr class="memitem:adb76c0f71c1f084869ac41aa5b0fbb97"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#adb76c0f71c1f084869ac41aa5b0fbb97">BMP280_DEVICE_ADDRESS_VDDIO</a>&#160;&#160;&#160;  (0x77 &lt;&lt; 1)</td></tr>
 <tr class="separator:adb76c0f71c1f084869ac41aa5b0fbb97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Raw temperature data registers addresses, read only</div></td></tr>
 <tr class="memitem:a887f1b7dab20ccebe9b1c451f15d3c86"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a887f1b7dab20ccebe9b1c451f15d3c86">BMP280_REG_TEMP_XLSB</a>&#160;&#160;&#160;0xFC</td></tr>
@@ -184,61 +191,61 @@ Macros</h2></td></tr>
 <tr class="memitem:a88a9a812a683d8d2d05d2ba5a87fe947"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a88a9a812a683d8d2d05d2ba5a87fe947">BMP280_VAL_STATUS_IM_UPDATE</a>&#160;&#160;&#160;1U &lt;&lt; 0</td></tr>
 <tr class="separator:a88a9a812a683d8d2d05d2ba5a87fe947"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Valid CTRL_MEAS register acquisition option values</div></td></tr>
-<tr class="memitem:a015280a4d51e99c7befe6132e7a253d9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a015280a4d51e99c7befe6132e7a253d9">BMP280_VAL_CTRL_MEAS_OSRS_T_0</a>&#160;&#160;&#160;0b00000000</td></tr>
+<tr class="memitem:a015280a4d51e99c7befe6132e7a253d9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a015280a4d51e99c7befe6132e7a253d9">BMP280_VAL_CTRL_MEAS_OSRS_T_0</a>&#160;&#160;&#160;0x00</td></tr>
 <tr class="separator:a015280a4d51e99c7befe6132e7a253d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca9cd4401dae45cf6b4049eb0749fbd7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#aca9cd4401dae45cf6b4049eb0749fbd7">BMP280_VAL_CTRL_MEAS_OSRS_T_1</a>&#160;&#160;&#160;0b00100000</td></tr>
+<tr class="memitem:aca9cd4401dae45cf6b4049eb0749fbd7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#aca9cd4401dae45cf6b4049eb0749fbd7">BMP280_VAL_CTRL_MEAS_OSRS_T_1</a>&#160;&#160;&#160;0x01</td></tr>
 <tr class="separator:aca9cd4401dae45cf6b4049eb0749fbd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2dbf42869041cd539440b9808600ee22"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a2dbf42869041cd539440b9808600ee22">BMP280_VAL_CTRL_MEAS_OSRS_T_2</a>&#160;&#160;&#160;0b01000000</td></tr>
+<tr class="memitem:a2dbf42869041cd539440b9808600ee22"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a2dbf42869041cd539440b9808600ee22">BMP280_VAL_CTRL_MEAS_OSRS_T_2</a>&#160;&#160;&#160;0x02</td></tr>
 <tr class="separator:a2dbf42869041cd539440b9808600ee22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bb10eee0f71cc2befcc271c5d6df3c8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a4bb10eee0f71cc2befcc271c5d6df3c8">BMP280_VAL_CTRL_MEAS_OSRS_T_4</a>&#160;&#160;&#160;0b01100000</td></tr>
+<tr class="memitem:a4bb10eee0f71cc2befcc271c5d6df3c8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a4bb10eee0f71cc2befcc271c5d6df3c8">BMP280_VAL_CTRL_MEAS_OSRS_T_4</a>&#160;&#160;&#160;0x03</td></tr>
 <tr class="separator:a4bb10eee0f71cc2befcc271c5d6df3c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad68704ed847aec8eddbae239fdd71834"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#ad68704ed847aec8eddbae239fdd71834">BMP280_VAL_CTRL_MEAS_OSRS_T_8</a>&#160;&#160;&#160;0b10000000</td></tr>
+<tr class="memitem:ad68704ed847aec8eddbae239fdd71834"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#ad68704ed847aec8eddbae239fdd71834">BMP280_VAL_CTRL_MEAS_OSRS_T_8</a>&#160;&#160;&#160;0x04</td></tr>
 <tr class="separator:ad68704ed847aec8eddbae239fdd71834"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed915bd536e89f6556cae09c197ab6af"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#aed915bd536e89f6556cae09c197ab6af">BMP280_VAL_CTRL_MEAS_OSRS_T_16</a>&#160;&#160;&#160;0b11100000</td></tr>
+<tr class="memitem:aed915bd536e89f6556cae09c197ab6af"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#aed915bd536e89f6556cae09c197ab6af">BMP280_VAL_CTRL_MEAS_OSRS_T_16</a>&#160;&#160;&#160;0x05</td></tr>
 <tr class="separator:aed915bd536e89f6556cae09c197ab6af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0089d28848347728df01c71693711d34"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a0089d28848347728df01c71693711d34">BMP280_VAL_CTRL_MEAS_OSRS_P_0</a>&#160;&#160;&#160;0b00000000</td></tr>
+<tr class="memitem:a0089d28848347728df01c71693711d34"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a0089d28848347728df01c71693711d34">BMP280_VAL_CTRL_MEAS_OSRS_P_0</a>&#160;&#160;&#160;0x00</td></tr>
 <tr class="separator:a0089d28848347728df01c71693711d34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa419cad89d98050e63dc6131c846993"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#aaa419cad89d98050e63dc6131c846993">BMP280_VAL_CTRL_MEAS_OSRS_P_1</a>&#160;&#160;&#160;0b00000100</td></tr>
+<tr class="memitem:aaa419cad89d98050e63dc6131c846993"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#aaa419cad89d98050e63dc6131c846993">BMP280_VAL_CTRL_MEAS_OSRS_P_1</a>&#160;&#160;&#160;0x01</td></tr>
 <tr class="separator:aaa419cad89d98050e63dc6131c846993"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74c563435999df06f8d2544f5514fa06"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a74c563435999df06f8d2544f5514fa06">BMP280_VAL_CTRL_MEAS_OSRS_P_2</a>&#160;&#160;&#160;0b00001000</td></tr>
+<tr class="memitem:a74c563435999df06f8d2544f5514fa06"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a74c563435999df06f8d2544f5514fa06">BMP280_VAL_CTRL_MEAS_OSRS_P_2</a>&#160;&#160;&#160;0x02</td></tr>
 <tr class="separator:a74c563435999df06f8d2544f5514fa06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39fd9575b310452d7d09c4b8fdeae9d0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a39fd9575b310452d7d09c4b8fdeae9d0">BMP280_VAL_CTRL_MEAS_OSRS_P_4</a>&#160;&#160;&#160;0b00001100</td></tr>
+<tr class="memitem:a39fd9575b310452d7d09c4b8fdeae9d0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a39fd9575b310452d7d09c4b8fdeae9d0">BMP280_VAL_CTRL_MEAS_OSRS_P_4</a>&#160;&#160;&#160;0x03</td></tr>
 <tr class="separator:a39fd9575b310452d7d09c4b8fdeae9d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5c26cd953a897a9a5ac372802bb4222"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#ae5c26cd953a897a9a5ac372802bb4222">BMP280_VAL_CTRL_MEAS_OSRS_P_8</a>&#160;&#160;&#160;0b00010000</td></tr>
+<tr class="memitem:ae5c26cd953a897a9a5ac372802bb4222"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#ae5c26cd953a897a9a5ac372802bb4222">BMP280_VAL_CTRL_MEAS_OSRS_P_8</a>&#160;&#160;&#160;0x04</td></tr>
 <tr class="separator:ae5c26cd953a897a9a5ac372802bb4222"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a22261e836f7905525a4c7a8e594f8386"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a22261e836f7905525a4c7a8e594f8386">BMP280_VAL_CTRL_MEAS_OSRS_P_16</a>&#160;&#160;&#160;0b00011100</td></tr>
+<tr class="memitem:a22261e836f7905525a4c7a8e594f8386"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a22261e836f7905525a4c7a8e594f8386">BMP280_VAL_CTRL_MEAS_OSRS_P_16</a>&#160;&#160;&#160;0x05</td></tr>
 <tr class="separator:a22261e836f7905525a4c7a8e594f8386"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a210646d7540cf67c79589cc03dc65f79"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a210646d7540cf67c79589cc03dc65f79">BMP280_VAL_CTRL_MEAS_MODE_SLEEP</a>&#160;&#160;&#160;0b00000000</td></tr>
+<tr class="memitem:a210646d7540cf67c79589cc03dc65f79"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a210646d7540cf67c79589cc03dc65f79">BMP280_VAL_CTRL_MEAS_MODE_SLEEP</a>&#160;&#160;&#160;0x00</td></tr>
 <tr class="separator:a210646d7540cf67c79589cc03dc65f79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8647eb17cbd504a3c61bc9cf2c77c6a0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a8647eb17cbd504a3c61bc9cf2c77c6a0">BMP280_VAL_CTRL_MEAS_MODE_FORCED</a>&#160;&#160;&#160;0b00000001</td></tr>
+<tr class="memitem:a8647eb17cbd504a3c61bc9cf2c77c6a0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a8647eb17cbd504a3c61bc9cf2c77c6a0">BMP280_VAL_CTRL_MEAS_MODE_FORCED</a>&#160;&#160;&#160;0x01</td></tr>
 <tr class="separator:a8647eb17cbd504a3c61bc9cf2c77c6a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaff829e4e8346fb75e75c2d09a7b38c7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#aaff829e4e8346fb75e75c2d09a7b38c7">BMP280_VAL_CTRL_MEAS_MODE_NORMAL</a>&#160;&#160;&#160;0b00000011</td></tr>
+<tr class="memitem:aaff829e4e8346fb75e75c2d09a7b38c7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#aaff829e4e8346fb75e75c2d09a7b38c7">BMP280_VAL_CTRL_MEAS_MODE_NORMAL</a>&#160;&#160;&#160;0x03</td></tr>
 <tr class="separator:aaff829e4e8346fb75e75c2d09a7b38c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a197ccf56d55438760b2ee5e759191e41"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a197ccf56d55438760b2ee5e759191e41">BMP280_VAL_CTRL_CONFIG_T_SB_0_5</a>&#160;&#160;&#160;0b00000000</td></tr>
+<tr class="memitem:a197ccf56d55438760b2ee5e759191e41"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a197ccf56d55438760b2ee5e759191e41">BMP280_VAL_CTRL_CONFIG_T_SB_0_5</a>&#160;&#160;&#160;0x00</td></tr>
 <tr class="separator:a197ccf56d55438760b2ee5e759191e41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7313066af9578e5cc4b746eec02eb9b7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a7313066af9578e5cc4b746eec02eb9b7">BMP280_VAL_CTRL_CONFIG_T_SB_62_5</a>&#160;&#160;&#160;0b00100000</td></tr>
+<tr class="memitem:a7313066af9578e5cc4b746eec02eb9b7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a7313066af9578e5cc4b746eec02eb9b7">BMP280_VAL_CTRL_CONFIG_T_SB_62_5</a>&#160;&#160;&#160;0x01</td></tr>
 <tr class="separator:a7313066af9578e5cc4b746eec02eb9b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8282a6c32bac9ec55cc4a7314934519"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#ad8282a6c32bac9ec55cc4a7314934519">BMP280_VAL_CTRL_CONFIG_T_SB_125</a>&#160;&#160;&#160;0b01000000</td></tr>
+<tr class="memitem:ad8282a6c32bac9ec55cc4a7314934519"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#ad8282a6c32bac9ec55cc4a7314934519">BMP280_VAL_CTRL_CONFIG_T_SB_125</a>&#160;&#160;&#160;0x02</td></tr>
 <tr class="separator:ad8282a6c32bac9ec55cc4a7314934519"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d893600fd44a8fd8cabb35b3b073de4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a5d893600fd44a8fd8cabb35b3b073de4">BMP280_VAL_CTRL_CONFIG_T_SB_250</a>&#160;&#160;&#160;0b01100000</td></tr>
+<tr class="memitem:a5d893600fd44a8fd8cabb35b3b073de4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a5d893600fd44a8fd8cabb35b3b073de4">BMP280_VAL_CTRL_CONFIG_T_SB_250</a>&#160;&#160;&#160;0x03</td></tr>
 <tr class="separator:a5d893600fd44a8fd8cabb35b3b073de4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ddb93977737179cf87566577b6a9589"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a7ddb93977737179cf87566577b6a9589">BMP280_VAL_CTRL_CONFIG_T_SB_500</a>&#160;&#160;&#160;0b10000000</td></tr>
+<tr class="memitem:a7ddb93977737179cf87566577b6a9589"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a7ddb93977737179cf87566577b6a9589">BMP280_VAL_CTRL_CONFIG_T_SB_500</a>&#160;&#160;&#160;0x04</td></tr>
 <tr class="separator:a7ddb93977737179cf87566577b6a9589"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a719c6f612e8b99a4284cf76c6402db"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a1a719c6f612e8b99a4284cf76c6402db">BMP280_VAL_CTRL_CONFIG_T_SB_1000</a>&#160;&#160;&#160;0b10100000</td></tr>
+<tr class="memitem:a1a719c6f612e8b99a4284cf76c6402db"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a1a719c6f612e8b99a4284cf76c6402db">BMP280_VAL_CTRL_CONFIG_T_SB_1000</a>&#160;&#160;&#160;0x05</td></tr>
 <tr class="separator:a1a719c6f612e8b99a4284cf76c6402db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2fe1226fff169e00841ab6e45e3a0cd2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a2fe1226fff169e00841ab6e45e3a0cd2">BMP280_VAL_CTRL_CONFIG_T_SB_2000</a>&#160;&#160;&#160;0b11000000</td></tr>
+<tr class="memitem:a2fe1226fff169e00841ab6e45e3a0cd2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a2fe1226fff169e00841ab6e45e3a0cd2">BMP280_VAL_CTRL_CONFIG_T_SB_2000</a>&#160;&#160;&#160;0x06</td></tr>
 <tr class="separator:a2fe1226fff169e00841ab6e45e3a0cd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac75028a19d9e72262b3edb460776f4af"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#ac75028a19d9e72262b3edb460776f4af">BMP280_VAL_CTRL_CONFIG_T_SB_4000</a>&#160;&#160;&#160;0b11100000</td></tr>
+<tr class="memitem:ac75028a19d9e72262b3edb460776f4af"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#ac75028a19d9e72262b3edb460776f4af">BMP280_VAL_CTRL_CONFIG_T_SB_4000</a>&#160;&#160;&#160;0x07</td></tr>
 <tr class="separator:ac75028a19d9e72262b3edb460776f4af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80ec11646c03b6fe4440bfe05d21a0d8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a80ec11646c03b6fe4440bfe05d21a0d8">BMP280_VAL_CTRL_CONFIG_FILTER_0</a>&#160;&#160;&#160;0b00000000</td></tr>
+<tr class="memitem:a80ec11646c03b6fe4440bfe05d21a0d8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a80ec11646c03b6fe4440bfe05d21a0d8">BMP280_VAL_CTRL_CONFIG_FILTER_0</a>&#160;&#160;&#160;0x00</td></tr>
 <tr class="separator:a80ec11646c03b6fe4440bfe05d21a0d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5755b9a99976f9d3084404bed815c01"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#aa5755b9a99976f9d3084404bed815c01">BMP280_VAL_CTRL_CONFIG_FILTER_2</a>&#160;&#160;&#160;0b00000100</td></tr>
+<tr class="memitem:aa5755b9a99976f9d3084404bed815c01"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#aa5755b9a99976f9d3084404bed815c01">BMP280_VAL_CTRL_CONFIG_FILTER_2</a>&#160;&#160;&#160;0x01</td></tr>
 <tr class="separator:aa5755b9a99976f9d3084404bed815c01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6082f464c4ed4338bb52c6cf3059b36f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a6082f464c4ed4338bb52c6cf3059b36f">BMP280_VAL_CTRL_CONFIG_FILTER_4</a>&#160;&#160;&#160;0b00001000</td></tr>
+<tr class="memitem:a6082f464c4ed4338bb52c6cf3059b36f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a6082f464c4ed4338bb52c6cf3059b36f">BMP280_VAL_CTRL_CONFIG_FILTER_4</a>&#160;&#160;&#160;0x02</td></tr>
 <tr class="separator:a6082f464c4ed4338bb52c6cf3059b36f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ab8e426d3e5a402187f636a9bd12d63"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a8ab8e426d3e5a402187f636a9bd12d63">BMP280_VAL_CTRL_CONFIG_FILTER_8</a>&#160;&#160;&#160;0b00001100</td></tr>
+<tr class="memitem:a8ab8e426d3e5a402187f636a9bd12d63"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a8ab8e426d3e5a402187f636a9bd12d63">BMP280_VAL_CTRL_CONFIG_FILTER_8</a>&#160;&#160;&#160;0x03</td></tr>
 <tr class="separator:a8ab8e426d3e5a402187f636a9bd12d63"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b6b4908cac370bf6f3dc442a4daf3f3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a1b6b4908cac370bf6f3dc442a4daf3f3">BMP280_VAL_CTRL_CONFIG_FILTER_16</a>&#160;&#160;&#160;0b00010000</td></tr>
+<tr class="memitem:a1b6b4908cac370bf6f3dc442a4daf3f3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a1b6b4908cac370bf6f3dc442a4daf3f3">BMP280_VAL_CTRL_CONFIG_FILTER_16</a>&#160;&#160;&#160;0x04</td></tr>
 <tr class="separator:a1b6b4908cac370bf6f3dc442a4daf3f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a342405e826ad2dc7dbbb46611b2c24c7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a342405e826ad2dc7dbbb46611b2c24c7">BMP280_VAL_CTRL_SPI3W_EN</a>&#160;&#160;&#160;0b00000001</td></tr>
 <tr class="separator:a342405e826ad2dc7dbbb46611b2c24c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -247,6 +254,11 @@ Macros</h2></td></tr>
 <tr class="separator:a2151bf39d798c80e3d034fa46a1aefb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01bd6e4eda33933c701a8e99802b89d2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a01bd6e4eda33933c701a8e99802b89d2">RETURN_32BIT</a>&#160;&#160;&#160;false</td></tr>
 <tr class="separator:a01bd6e4eda33933c701a8e99802b89d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a9770329dfa8b704a0217d9ab92793c7e"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct_b_m_p280___result.html">BMP280_Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a9770329dfa8b704a0217d9ab92793c7e">BMP280_Result</a></td></tr>
+<tr class="separator:a9770329dfa8b704a0217d9ab92793c7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -259,9 +271,9 @@ Functions</h2></td></tr>
 <tr class="memitem:aac5dadd8c2f03898ed77fdb2eb77c0fd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#aac5dadd8c2f03898ed77fdb2eb77c0fd">BMP280_Wake_I2C</a> (I2C_HandleTypeDef i2c_handle, uint8_t device_address)</td></tr>
 <tr class="memdesc:aac5dadd8c2f03898ed77fdb2eb77c0fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wake sensor over I2C - used when measuring in forced mode.  <br /></td></tr>
 <tr class="separator:aac5dadd8c2f03898ed77fdb2eb77c0fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5772ec5beaed520ac8bf4d0599ebb05e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a5772ec5beaed520ac8bf4d0599ebb05e">BMP280_Measure_I2C</a> (I2C_HandleTypeDef i2c_handle, uint8_t device_address)</td></tr>
-<tr class="memdesc:a5772ec5beaed520ac8bf4d0599ebb05e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Measure temperature and pressure over I2C.  <br /></td></tr>
-<tr class="separator:a5772ec5beaed520ac8bf4d0599ebb05e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ba1d44816edfca8c80d1f49c6b9d644"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_b_m_p280___result.html">BMP280_Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8h.html#a3ba1d44816edfca8c80d1f49c6b9d644">BMP280_Measure_I2C</a> (I2C_HandleTypeDef i2c_handle, uint8_t device_address)</td></tr>
+<tr class="memdesc:a3ba1d44816edfca8c80d1f49c6b9d644"><td class="mdescLeft">&#160;</td><td class="mdescRight">Measure temperature and pressure over I2C.  <br /></td></tr>
+<tr class="separator:a3ba1d44816edfca8c80d1f49c6b9d644"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>BMP280 driver file header. </p>
@@ -275,11 +287,11 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_DEVICE_ADDRESS_GND&#160;&#160;&#160;0x76 &lt;&lt; 1</td>
+          <td class="memname">#define BMP280_DEVICE_ADDRESS_GND&#160;&#160;&#160;  (0x76 &lt;&lt; 1)</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Used when SDO pulled down </p>
+<p>Used when SDO pulled down \ </p>
 
 </div>
 </div>
@@ -290,11 +302,11 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_DEVICE_ADDRESS_VDDIO&#160;&#160;&#160;0x77 &lt;&lt; 1</td>
+          <td class="memname">#define BMP280_DEVICE_ADDRESS_VDDIO&#160;&#160;&#160;  (0x77 &lt;&lt; 1)</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Used when SDO pulled up </p>
+<p>Used when SDO pulled up \ </p>
 
 </div>
 </div>
@@ -860,7 +872,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_FILTER_0&#160;&#160;&#160;0b00000000</td>
+          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_FILTER_0&#160;&#160;&#160;0x00</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -875,7 +887,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_FILTER_16&#160;&#160;&#160;0b00010000</td>
+          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_FILTER_16&#160;&#160;&#160;0x04</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -890,7 +902,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_FILTER_2&#160;&#160;&#160;0b00000100</td>
+          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_FILTER_2&#160;&#160;&#160;0x01</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -905,7 +917,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_FILTER_4&#160;&#160;&#160;0b00001000</td>
+          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_FILTER_4&#160;&#160;&#160;0x02</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -920,7 +932,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_FILTER_8&#160;&#160;&#160;0b00001100</td>
+          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_FILTER_8&#160;&#160;&#160;0x03</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -935,7 +947,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_T_SB_0_5&#160;&#160;&#160;0b00000000</td>
+          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_T_SB_0_5&#160;&#160;&#160;0x00</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -950,7 +962,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_T_SB_1000&#160;&#160;&#160;0b10100000</td>
+          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_T_SB_1000&#160;&#160;&#160;0x05</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -965,7 +977,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_T_SB_125&#160;&#160;&#160;0b01000000</td>
+          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_T_SB_125&#160;&#160;&#160;0x02</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -980,7 +992,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_T_SB_2000&#160;&#160;&#160;0b11000000</td>
+          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_T_SB_2000&#160;&#160;&#160;0x06</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -995,7 +1007,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_T_SB_250&#160;&#160;&#160;0b01100000</td>
+          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_T_SB_250&#160;&#160;&#160;0x03</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1010,7 +1022,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_T_SB_4000&#160;&#160;&#160;0b11100000</td>
+          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_T_SB_4000&#160;&#160;&#160;0x07</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1025,7 +1037,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_T_SB_500&#160;&#160;&#160;0b10000000</td>
+          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_T_SB_500&#160;&#160;&#160;0x04</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1040,7 +1052,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_T_SB_62_5&#160;&#160;&#160;0b00100000</td>
+          <td class="memname">#define BMP280_VAL_CTRL_CONFIG_T_SB_62_5&#160;&#160;&#160;0x01</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1055,7 +1067,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_MEAS_MODE_FORCED&#160;&#160;&#160;0b00000001</td>
+          <td class="memname">#define BMP280_VAL_CTRL_MEAS_MODE_FORCED&#160;&#160;&#160;0x01</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1070,7 +1082,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_MEAS_MODE_NORMAL&#160;&#160;&#160;0b00000011</td>
+          <td class="memname">#define BMP280_VAL_CTRL_MEAS_MODE_NORMAL&#160;&#160;&#160;0x03</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1085,7 +1097,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_MEAS_MODE_SLEEP&#160;&#160;&#160;0b00000000</td>
+          <td class="memname">#define BMP280_VAL_CTRL_MEAS_MODE_SLEEP&#160;&#160;&#160;0x00</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1100,7 +1112,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_P_0&#160;&#160;&#160;0b00000000</td>
+          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_P_0&#160;&#160;&#160;0x00</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1115,7 +1127,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_P_1&#160;&#160;&#160;0b00000100</td>
+          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_P_1&#160;&#160;&#160;0x01</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1130,7 +1142,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_P_16&#160;&#160;&#160;0b00011100</td>
+          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_P_16&#160;&#160;&#160;0x05</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1145,7 +1157,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_P_2&#160;&#160;&#160;0b00001000</td>
+          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_P_2&#160;&#160;&#160;0x02</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1160,7 +1172,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_P_4&#160;&#160;&#160;0b00001100</td>
+          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_P_4&#160;&#160;&#160;0x03</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1175,7 +1187,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_P_8&#160;&#160;&#160;0b00010000</td>
+          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_P_8&#160;&#160;&#160;0x04</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1190,7 +1202,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_T_0&#160;&#160;&#160;0b00000000</td>
+          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_T_0&#160;&#160;&#160;0x00</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1205,7 +1217,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_T_1&#160;&#160;&#160;0b00100000</td>
+          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_T_1&#160;&#160;&#160;0x01</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1220,7 +1232,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_T_16&#160;&#160;&#160;0b11100000</td>
+          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_T_16&#160;&#160;&#160;0x05</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1235,7 +1247,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_T_2&#160;&#160;&#160;0b01000000</td>
+          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_T_2&#160;&#160;&#160;0x02</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1250,7 +1262,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_T_4&#160;&#160;&#160;0b01100000</td>
+          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_T_4&#160;&#160;&#160;0x03</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1265,7 +1277,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_T_8&#160;&#160;&#160;0b10000000</td>
+          <td class="memname">#define BMP280_VAL_CTRL_MEAS_OSRS_T_8&#160;&#160;&#160;0x04</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1375,6 +1387,21 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>for MCU with 64-bit operations support </p>
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a9770329dfa8b704a0217d9ab92793c7e" name="a9770329dfa8b704a0217d9ab92793c7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9770329dfa8b704a0217d9ab92793c7e">&#9670;&#160;</a></span>BMP280_Result</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="struct_b_m_p280___result.html">BMP280_Result</a> <a class="el" href="struct_b_m_p280___result.html">BMP280_Result</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -1493,14 +1520,14 @@ true == successful</dd></dl>
 
 </div>
 </div>
-<a id="a5772ec5beaed520ac8bf4d0599ebb05e" name="a5772ec5beaed520ac8bf4d0599ebb05e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5772ec5beaed520ac8bf4d0599ebb05e">&#9670;&#160;</a></span>BMP280_Measure_I2C()</h2>
+<a id="a3ba1d44816edfca8c80d1f49c6b9d644" name="a3ba1d44816edfca8c80d1f49c6b9d644"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ba1d44816edfca8c80d1f49c6b9d644">&#9670;&#160;</a></span>BMP280_Measure_I2C()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float BMP280_Measure_I2C </td>
+          <td class="memname">struct <a class="el" href="struct_b_m_p280___result.html">BMP280_Result</a> BMP280_Measure_I2C </td>
           <td>(</td>
           <td class="paramtype">I2C_HandleTypeDef&#160;</td>
           <td class="paramname"><em>i2c_handle</em>, </td>

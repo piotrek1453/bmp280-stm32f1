@@ -95,40 +95,14 @@ Functions</h2></td></tr>
 <tr class="memitem:aac5dadd8c2f03898ed77fdb2eb77c0fd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8c.html#aac5dadd8c2f03898ed77fdb2eb77c0fd">BMP280_Wake_I2C</a> (I2C_HandleTypeDef i2c_handle, uint8_t device_address)</td></tr>
 <tr class="memdesc:aac5dadd8c2f03898ed77fdb2eb77c0fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wake sensor over I2C - used when measuring in forced mode.  <br /></td></tr>
 <tr class="separator:aac5dadd8c2f03898ed77fdb2eb77c0fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5772ec5beaed520ac8bf4d0599ebb05e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8c.html#a5772ec5beaed520ac8bf4d0599ebb05e">BMP280_Measure_I2C</a> (I2C_HandleTypeDef i2c_handle, uint8_t device_address)</td></tr>
-<tr class="memdesc:a5772ec5beaed520ac8bf4d0599ebb05e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Measure temperature and pressure over I2C.  <br /></td></tr>
-<tr class="separator:a5772ec5beaed520ac8bf4d0599ebb05e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ba1d44816edfca8c80d1f49c6b9d644"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_b_m_p280___result.html">BMP280_Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8c.html#a3ba1d44816edfca8c80d1f49c6b9d644">BMP280_Measure_I2C</a> (I2C_HandleTypeDef i2c_handle, uint8_t device_address)</td></tr>
+<tr class="memdesc:a3ba1d44816edfca8c80d1f49c6b9d644"><td class="mdescLeft">&#160;</td><td class="mdescRight">Measure temperature and pressure over I2C.  <br /></td></tr>
+<tr class="separator:a3ba1d44816edfca8c80d1f49c6b9d644"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:aadd6b6079d5dff0f1ebe907cdc0c8b9a"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8c.html#aadd6b6079d5dff0f1ebe907cdc0c8b9a">rawTemperature</a></td></tr>
-<tr class="separator:aadd6b6079d5dff0f1ebe907cdc0c8b9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa028c2f6e88e08f046fc2ed2a32f49e5"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8c.html#aa028c2f6e88e08f046fc2ed2a32f49e5">rawPressure</a></td></tr>
-<tr class="separator:aa028c2f6e88e08f046fc2ed2a32f49e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a730ed166c629bded674b13faffe9cef7"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8c.html#a730ed166c629bded674b13faffe9cef7">dig_T1</a></td></tr>
-<tr class="separator:a730ed166c629bded674b13faffe9cef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14cb8cb6405f1dbd7b96eacb1564f3ac"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8c.html#a14cb8cb6405f1dbd7b96eacb1564f3ac">dig_P1</a></td></tr>
-<tr class="separator:a14cb8cb6405f1dbd7b96eacb1564f3ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5c023a004c0497ba616d916155c85bb"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8c.html#ab5c023a004c0497ba616d916155c85bb">dig_T2</a></td></tr>
-<tr class="separator:ab5c023a004c0497ba616d916155c85bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9536e89c30bbd791153ac9e407b0752b"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8c.html#a9536e89c30bbd791153ac9e407b0752b">dig_T3</a></td></tr>
-<tr class="separator:a9536e89c30bbd791153ac9e407b0752b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf2720ad17acc224ed28e66ec3de32ed"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8c.html#abf2720ad17acc224ed28e66ec3de32ed">dig_P2</a></td></tr>
-<tr class="separator:abf2720ad17acc224ed28e66ec3de32ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16db1b4967cfd3dc34219d8fb8c92aeb"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8c.html#a16db1b4967cfd3dc34219d8fb8c92aeb">dig_P3</a></td></tr>
-<tr class="separator:a16db1b4967cfd3dc34219d8fb8c92aeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c7db64a28b0e240d0478921741dd67d"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8c.html#a9c7db64a28b0e240d0478921741dd67d">dig_P4</a></td></tr>
-<tr class="separator:a9c7db64a28b0e240d0478921741dd67d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e509836d7ae0753ceaaed354b5e1479"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8c.html#a7e509836d7ae0753ceaaed354b5e1479">dig_P5</a></td></tr>
-<tr class="separator:a7e509836d7ae0753ceaaed354b5e1479"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ae5570c6daeda1d3666ed3dad96c4b7"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8c.html#a2ae5570c6daeda1d3666ed3dad96c4b7">dig_P6</a></td></tr>
-<tr class="separator:a2ae5570c6daeda1d3666ed3dad96c4b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f3c3b4bc3acd51c35229dd2cc50a3d6"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8c.html#a7f3c3b4bc3acd51c35229dd2cc50a3d6">dig_P7</a></td></tr>
-<tr class="separator:a7f3c3b4bc3acd51c35229dd2cc50a3d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40493b036281e2b5fdfdf1776fe4708a"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8c.html#a40493b036281e2b5fdfdf1776fe4708a">dig_P8</a></td></tr>
-<tr class="separator:a40493b036281e2b5fdfdf1776fe4708a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a361620dc95ad1d56b5d416d9d290c5f4"><td class="memItemLeft" align="right" valign="top">int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8c.html#a361620dc95ad1d56b5d416d9d290c5f4">dig_P9</a></td></tr>
-<tr class="separator:a361620dc95ad1d56b5d416d9d290c5f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1f0d71206317758c70cd96314b6fc02"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_b_m_p280_8c.html#ac1f0d71206317758c70cd96314b6fc02">t_fine</a></td></tr>
+<tr class="separator:ac1f0d71206317758c70cd96314b6fc02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>BMP280 driver file. </p>
@@ -227,14 +201,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a5772ec5beaed520ac8bf4d0599ebb05e" name="a5772ec5beaed520ac8bf4d0599ebb05e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5772ec5beaed520ac8bf4d0599ebb05e">&#9670;&#160;</a></span>BMP280_Measure_I2C()</h2>
+<a id="a3ba1d44816edfca8c80d1f49c6b9d644" name="a3ba1d44816edfca8c80d1f49c6b9d644"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ba1d44816edfca8c80d1f49c6b9d644">&#9670;&#160;</a></span>BMP280_Measure_I2C()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float BMP280_Measure_I2C </td>
+          <td class="memname">struct <a class="el" href="struct_b_m_p280___result.html">BMP280_Result</a> BMP280_Measure_I2C </td>
           <td>(</td>
           <td class="paramtype">I2C_HandleTypeDef&#160;</td>
           <td class="paramname"><em>i2c_handle</em>, </td>
@@ -299,196 +273,14 @@ BMP280_DEVICE_ADDRESS_VDDIO = 0x77 </td></tr>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a14cb8cb6405f1dbd7b96eacb1564f3ac" name="a14cb8cb6405f1dbd7b96eacb1564f3ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14cb8cb6405f1dbd7b96eacb1564f3ac">&#9670;&#160;</a></span>dig_P1</h2>
+<a id="ac1f0d71206317758c70cd96314b6fc02" name="ac1f0d71206317758c70cd96314b6fc02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1f0d71206317758c70cd96314b6fc02">&#9670;&#160;</a></span>t_fine</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint16_t dig_P1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="abf2720ad17acc224ed28e66ec3de32ed" name="abf2720ad17acc224ed28e66ec3de32ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf2720ad17acc224ed28e66ec3de32ed">&#9670;&#160;</a></span>dig_P2</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int16_t dig_P2</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a16db1b4967cfd3dc34219d8fb8c92aeb" name="a16db1b4967cfd3dc34219d8fb8c92aeb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a16db1b4967cfd3dc34219d8fb8c92aeb">&#9670;&#160;</a></span>dig_P3</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int16_t dig_P3</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a9c7db64a28b0e240d0478921741dd67d" name="a9c7db64a28b0e240d0478921741dd67d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9c7db64a28b0e240d0478921741dd67d">&#9670;&#160;</a></span>dig_P4</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int16_t dig_P4</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7e509836d7ae0753ceaaed354b5e1479" name="a7e509836d7ae0753ceaaed354b5e1479"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e509836d7ae0753ceaaed354b5e1479">&#9670;&#160;</a></span>dig_P5</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int16_t dig_P5</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a2ae5570c6daeda1d3666ed3dad96c4b7" name="a2ae5570c6daeda1d3666ed3dad96c4b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ae5570c6daeda1d3666ed3dad96c4b7">&#9670;&#160;</a></span>dig_P6</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int16_t dig_P6</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7f3c3b4bc3acd51c35229dd2cc50a3d6" name="a7f3c3b4bc3acd51c35229dd2cc50a3d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f3c3b4bc3acd51c35229dd2cc50a3d6">&#9670;&#160;</a></span>dig_P7</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int16_t dig_P7</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a40493b036281e2b5fdfdf1776fe4708a" name="a40493b036281e2b5fdfdf1776fe4708a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40493b036281e2b5fdfdf1776fe4708a">&#9670;&#160;</a></span>dig_P8</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int16_t dig_P8</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a361620dc95ad1d56b5d416d9d290c5f4" name="a361620dc95ad1d56b5d416d9d290c5f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a361620dc95ad1d56b5d416d9d290c5f4">&#9670;&#160;</a></span>dig_P9</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int16_t dig_P9</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a730ed166c629bded674b13faffe9cef7" name="a730ed166c629bded674b13faffe9cef7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a730ed166c629bded674b13faffe9cef7">&#9670;&#160;</a></span>dig_T1</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint16_t dig_T1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab5c023a004c0497ba616d916155c85bb" name="ab5c023a004c0497ba616d916155c85bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5c023a004c0497ba616d916155c85bb">&#9670;&#160;</a></span>dig_T2</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int16_t dig_T2</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a9536e89c30bbd791153ac9e407b0752b" name="a9536e89c30bbd791153ac9e407b0752b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9536e89c30bbd791153ac9e407b0752b">&#9670;&#160;</a></span>dig_T3</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int16_t dig_T3</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa028c2f6e88e08f046fc2ed2a32f49e5" name="aa028c2f6e88e08f046fc2ed2a32f49e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa028c2f6e88e08f046fc2ed2a32f49e5">&#9670;&#160;</a></span>rawPressure</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int32_t rawPressure</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aadd6b6079d5dff0f1ebe907cdc0c8b9a" name="aadd6b6079d5dff0f1ebe907cdc0c8b9a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aadd6b6079d5dff0f1ebe907cdc0c8b9a">&#9670;&#160;</a></span>rawTemperature</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int32_t rawTemperature</td>
+          <td class="memname">int32_t t_fine</td>
         </tr>
       </table>
 </div><div class="memdoc">

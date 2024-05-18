@@ -53,14 +53,14 @@ struct BMP280_Result bmp280_result;
 osThreadId_t statusTaskHandle;
 const osThreadAttr_t statusTask_attributes = {
     .name = "statusTask",
-    .stack_size = 128 * 8,
+    .stack_size = 128 * 6,
     .priority = (osPriority_t)osPriorityNormal,
 };
 /* Definitions for ledTask */
 osThreadId_t ledTaskHandle;
 const osThreadAttr_t ledTask_attributes = {
     .name = "ledTask",
-    .stack_size = 128 * 4,
+    .stack_size = 128,
     .priority = (osPriority_t)osPriorityLow,
 };
 /* Definitions for USART2TxMutex */
@@ -158,10 +158,12 @@ void vStatusTask(void *argument) {
 
     if (osMutexAcquire(USART2TxMutexHandle, osWaitForever) == osOK) {
       printf("Pressure\tTemperature\r\n");
-      printf("%f\t%f\r\n", bmp280_result.Pressure, bmp280_result.Temperature);
+      printf("%0.2f hPa\t%0.2f deg C\r\n",
+             bmp280_result.Pressure / 100,
+             bmp280_result.Temperature);
       osMutexRelease(USART2TxMutexHandle);
     }
-    osDelay(20);
+    osDelay(200);
   }
   /* USER CODE END vStatusTask */
 }
@@ -176,10 +178,19 @@ void vStatusTask(void *argument) {
 void vLedTask(void *argument) {
   /* USER CODE BEGIN vLedTask */
   /* Infinite loop */
+  uint8_t rhythm = 0;
   while (true) {
-    HAL_GPIO_TogglePin(ON_BOARD_LED_1_GPIO_Port, ON_BOARD_LED_1_Pin);
-    HAL_GPIO_TogglePin(ON_BOARD_LED_2_GPIO_Port, ON_BOARD_LED_2_Pin);
-    osDelay(1000);
+    if (rhythm < 3) {
+      GPIOB->ODR ^= (1U << 2) | (1U << 13);
+      ++rhythm;
+      osDelay(100);
+    } else if (rhythm < 6) {
+      GPIOB->ODR ^= (1U << 2) | (1U << 13);
+      ++rhythm;
+      osDelay(500);
+    } else {
+      rhythm = 0;
+    }
   }
   /* USER CODE END vLedTask */
 }
