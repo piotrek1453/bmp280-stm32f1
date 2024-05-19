@@ -1,4 +1,4 @@
-../Core/Src/freertos.c:84:6:vApplicationIdleHook	1
-../Core/Src/freertos.c:106:6:MX_FREERTOS_Init	1
-../Core/Src/freertos.c:153:6:vStatusTask	2
-../Core/Src/freertos.c:178:6:vLedTask	3
+../Core/Src/freertos.c:86:6:vApplicationIdleHook	1
+../Core/Src/freertos.c:108:6:MX_FREERTOS_Init	1
+../Core/Src/freertos.c:156:6:vStatusTask	2
+../Core/Src/freertos.c:182:6:vLedTask	3
