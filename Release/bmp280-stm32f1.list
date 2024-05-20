@@ -2184,12 +2184,12 @@ Disassembly of section .text:
  800195e:	a801      	add	r0, sp, #4
  8001960:	9316      	str	r3, [sp, #88]	@ 0x58
  8001962:	f004 fa46 	bl	8005df2 <memcpy>
- 8001966:	2304      	movs	r3, #4
- 8001968:	9300      	str	r3, [sp, #0]
- 800196a:	2300      	movs	r3, #0
- 800196c:	2203      	movs	r2, #3
- 800196e:	2105      	movs	r1, #5
- 8001970:	4618      	mov	r0, r3
+ 8001966:	2105      	movs	r1, #5
+ 8001968:	2304      	movs	r3, #4
+ 800196a:	2203      	movs	r2, #3
+ 800196c:	4608      	mov	r0, r1
+ 800196e:	9300      	str	r3, [sp, #0]
+ 8001970:	2300      	movs	r3, #0
  8001972:	f7ff fc39 	bl	80011e8 <BMP280_Init_I2C>
  8001976:	f001 fb95 	bl	80030a4 <osKernelInitialize>
  800197a:	f7ff fe9d 	bl	80016b8 <MX_FREERTOS_Init>
