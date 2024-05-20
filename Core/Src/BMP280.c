@@ -101,7 +101,7 @@ bool BMP280_Init_I2C(uint8_t osrs_t,
                             &readBuffer,
                             1,
                             HAL_MAX_DELAY);
-  if (status != HAL_OK || readBuffer != 0x58) {
+  if (status != HAL_OK || readBuffer != BMP280_VAL_DEVID) {
     return false;
   }
 
