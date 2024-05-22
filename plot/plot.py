@@ -1,8 +1,5 @@
-import numpy
 import serial
 from serial.tools import list_ports
-import numpy as np
-from datetime import datetime
 import matplotlib.pyplot as plt
 
 ports = serial.tools.list_ports.comports()
