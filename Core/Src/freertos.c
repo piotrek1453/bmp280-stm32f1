@@ -19,9 +19,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "FreeRTOS.h"
-#include "task.h"
-#include "main.h"
 #include "cmsis_os.h"
+#include "main.h"
+#include "task.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -52,22 +52,20 @@ struct BMP280_Result bmp280_result;
 /* Definitions for statusTask */
 osThreadId_t statusTaskHandle;
 const osThreadAttr_t statusTask_attributes = {
-  .name = "statusTask",
-  .stack_size = 256 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
+    .name = "statusTask",
+    .stack_size = 256 * 4,
+    .priority = (osPriority_t)osPriorityNormal,
 };
 /* Definitions for ledTask */
 osThreadId_t ledTaskHandle;
 const osThreadAttr_t ledTask_attributes = {
-  .name = "ledTask",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityLow,
+    .name = "ledTask",
+    .stack_size = 128 * 4,
+    .priority = (osPriority_t)osPriorityLow,
 };
 /* Definitions for USART2TxMutex */
 osMutexId_t USART2TxMutexHandle;
-const osMutexAttr_t USART2TxMutex_attributes = {
-  .name = "USART2TxMutex"
-};
+const osMutexAttr_t USART2TxMutex_attributes = {.name = "USART2TxMutex"};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -101,10 +99,10 @@ void vApplicationIdleHook(void) {
 /* USER CODE END 2 */
 
 /**
-  * @brief  FreeRTOS initialization
-  * @param  None
-  * @retval None
-  */
+ * @brief  FreeRTOS initialization
+ * @param  None
+ * @retval None
+ */
 void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
 
@@ -143,7 +141,6 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN RTOS_EVENTS */
   /* add events, ... */
   /* USER CODE END RTOS_EVENTS */
-
 }
 
 /* USER CODE BEGIN Header_vStatusTask */
@@ -153,16 +150,15 @@ void MX_FREERTOS_Init(void) {
  * @retval None
  */
 /* USER CODE END Header_vStatusTask */
-void vStatusTask(void *argument)
-{
+void vStatusTask(void *argument) {
   /* USER CODE BEGIN vStatusTask */
   /* Infinite loop */
   while (true) {
     bmp280_result = BMP280_Measure_I2C(hi2c1, BMP280_DEVICE_ADDRESS_GND);
 
     if (osMutexAcquire(USART2TxMutexHandle, osWaitForever) == osOK) {
-      printf("Pressure\tTemperature\r\n");
-      printf("%0.2f hPa\t%0.2f deg C\r\n",
+      // printf("Pressure\tTemperature\r\n");
+      printf("%0.2f hPa\r\n%0.2f deg C\r\n",
              bmp280_result.Pressure / 100,
              bmp280_result.Temperature);
       osMutexRelease(USART2TxMutexHandle);
@@ -179,8 +175,7 @@ void vStatusTask(void *argument)
  * @retval None
  */
 /* USER CODE END Header_vLedTask */
-void vLedTask(void *argument)
-{
+void vLedTask(void *argument) {
   /* USER CODE BEGIN vLedTask */
   /* Infinite loop */
   uint8_t rhythm = 0;
@@ -204,4 +199,3 @@ void vLedTask(void *argument)
 /* USER CODE BEGIN Application */
 
 /* USER CODE END Application */
-
