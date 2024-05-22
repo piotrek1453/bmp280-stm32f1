@@ -1,7 +1,6 @@
+import pyqtgraph as pg
 import serial
 from serial.tools import list_ports
-import matplotlib.pyplot as plt
-import pyqtgraph as pg
 
 ports = serial.tools.list_ports.comports()
 STM32_serial = None
@@ -17,7 +16,9 @@ for port, desc, hwid in sorted(ports):
         STM32_serial = port
     print("{}: {} [{}]".format(port, desc, hwid))
 
-ser = serial.Serial(port=STM32_serial, baudrate=115200, stopbits=1, parity=serial.PARITY_NONE)
+ser = serial.Serial(
+    port=STM32_serial, baudrate=115200, stopbits=1, parity=serial.PARITY_NONE
+)
 
 if not ser.isOpen():
     ser.open()
@@ -32,10 +33,10 @@ while True:
     rawString = ser.readline().decode()
 
     if "hPa" in rawString:
-        pressure = rawString.replace('hPa', '')
+        pressure = rawString.replace("hPa", "")
         press_data.append(float(pressure))
     elif "deg C" in rawString:
-        temperature = rawString.replace('deg C', '')
+        temperature = rawString.replace("deg C", "")
         temp_data.append((float(temperature)))
 
     temp_plot.plot(temp_data, clear=True)
