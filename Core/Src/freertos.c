@@ -163,7 +163,7 @@ void vStatusTask(void *argument) {
              bmp280_result.Temperature);
       osMutexRelease(USART2TxMutexHandle);
     }
-    osDelay(200);
+    osDelay(50);
   }
   /* USER CODE END vStatusTask */
 }

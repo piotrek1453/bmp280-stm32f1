@@ -1878,7 +1878,7 @@ Disassembly of section .text:
  8001644:	f004 f972 	bl	800592c <iprintf>
  8001648:	f8d8 0000 	ldr.w	r0, [r8]
  800164c:	f001 fe1c 	bl	8003288 <osMutexRelease>
- 8001650:	20c8      	movs	r0, #200	@ 0xc8
+ 8001650:	2032      	movs	r0, #50	@ 0x32
  8001652:	f001 fd89 	bl	8003168 <osDelay>
  8001656:	e7ca      	b.n	80015ee <vStatusTask+0xe>
  8001658:	20000234 	.word	0x20000234

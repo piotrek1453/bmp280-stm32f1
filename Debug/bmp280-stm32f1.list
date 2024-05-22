@@ -2841,8 +2841,8 @@ void vStatusTask(void *argument) {
  8001caa:	4618      	mov	r0, r3
  8001cac:	f003 f8d8 	bl	8004e60 <osMutexRelease>
     }
-    osDelay(200);
- 8001cb0:	20c8      	movs	r0, #200	@ 0xc8
+    osDelay(50);
+ 8001cb0:	2032      	movs	r0, #50	@ 0x32
  8001cb2:	f002 ffaf 	bl	8004c14 <osDelay>
     bmp280_result = BMP280_Measure_I2C(hi2c1, BMP280_DEVICE_ADDRESS_GND);
  8001cb6:	e7bb      	b.n	8001c30 <vStatusTask+0x8>
