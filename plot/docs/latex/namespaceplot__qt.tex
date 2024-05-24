@@ -1,0 +1,42 @@
+\doxysection{plot\+\_\+qt Namespace Reference}
+\hypertarget{namespaceplot__qt}{}\label{namespaceplot__qt}\index{plot\_qt@{plot\_qt}}
+
+
+Class for plotting data from BMP280 sensor received over UART.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classplot__qt_1_1_serial_plot}{Serial\+Plot}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{namespaceplot__qt_af3119bcf1d7aa89befad70991c62dd16}\label{namespaceplot__qt_af3119bcf1d7aa89befad70991c62dd16} 
+{\bfseries plot\+\_\+thread} ()
+\begin{DoxyCompactList}\small\item\em Helper function to be used with threading. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceplot__qt_ae4c511e6accada5076392c680c6a86d4}{plot}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for plotting data from BMP280 sensor received over UART. 
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceplot__qt_ae4c511e6accada5076392c680c6a86d4}\label{namespaceplot__qt_ae4c511e6accada5076392c680c6a86d4} 
+\index{plot\_qt@{plot\_qt}!plot@{plot}}
+\index{plot@{plot}!plot\_qt@{plot\_qt}}
+\doxysubsubsection{\texorpdfstring{plot}{plot}}
+{\footnotesize\ttfamily plot\+\_\+qt.\+plot}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ threading.Thread(}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ target=plot\_thread,\ args=()}
+\DoxyCodeLine{00003\ \ \ \ \ )}
+
+\end{DoxyCode}

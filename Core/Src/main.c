@@ -98,7 +98,7 @@ int main(void) {
                   BMP280_VAL_CTRL_MEAS_OSRS_P_16,
                   BMP280_VAL_CTRL_MEAS_MODE_NORMAL,
                   BMP280_VAL_CTRL_CONFIG_T_SB_0_5,
-                  BMP280_VAL_CTRL_CONFIG_FILTER_16,
+                  BMP280_VAL_CTRL_CONFIG_FILTER_0,
                   hi2c1,
                   BMP280_DEVICE_ADDRESS_GND);
   /* USER CODE END 2 */

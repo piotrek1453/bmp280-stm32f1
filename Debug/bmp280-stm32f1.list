@@ -3280,7 +3280,7 @@ int main(void) {
  8001f36:	2254      	movs	r2, #84	@ 0x54
  8001f38:	4618      	mov	r0, r3
  8001f3a:	f006 fe60 	bl	8008bfe <memcpy>
- 8001f3e:	2304      	movs	r3, #4
+ 8001f3e:	2300      	movs	r3, #0
  8001f40:	9300      	str	r3, [sp, #0]
  8001f42:	2300      	movs	r3, #0
  8001f44:	2203      	movs	r2, #3

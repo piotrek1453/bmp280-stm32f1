@@ -1,0 +1,127 @@
+\doxysection{plot\+\_\+qt.\+Serial\+Plot Class Reference}
+\hypertarget{classplot__qt_1_1_serial_plot}{}\label{classplot__qt_1_1_serial_plot}\index{plot\_qt.SerialPlot@{plot\_qt.SerialPlot}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classplot__qt_1_1_serial_plot_a82e40a2ca58d0077f63d783ac0da5e26}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\begin{DoxyCompactList}\small\item\em The constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classplot__qt_1_1_serial_plot_ac1893aa898a8f040d82b1605756030bf}{connect\+\_\+port}} (self)
+\begin{DoxyCompactList}\small\item\em Open port to which ST-\/\+Link is connected. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classplot__qt_1_1_serial_plot_a315d704f20b61f9d80a17c0f6079a000}{get\+\_\+sensor\+\_\+values}} (self)
+\begin{DoxyCompactList}\small\item\em Poll COM port for pressure and temperature values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classplot__qt_1_1_serial_plot_a27893802d8b8ba830abf87d4cb18b5c9}{initialize\+\_\+dataframes}} (self)
+\begin{DoxyCompactList}\small\item\em Create new dataframes for storing sensor data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classplot__qt_1_1_serial_plot_a84b80c8e223f923604c155843c3f6893}{append\+\_\+dataframes}} (self)
+\begin{DoxyCompactList}\small\item\em Read sensor values and append to dataframes. \end{DoxyCompactList}\item 
+\Hypertarget{classplot__qt_1_1_serial_plot_a11b3fc9d00b194206ce948a2fafd95bf}\label{classplot__qt_1_1_serial_plot_a11b3fc9d00b194206ce948a2fafd95bf} 
+{\bfseries plot} (self)
+\begin{DoxyCompactList}\small\item\em Continuously poll for data and update the plots. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classplot__qt_1_1_serial_plot_a18f247ad65d2639f28e29578ae54fb14}{detect\+\_\+port}} ()
+\begin{DoxyCompactList}\small\item\em Helper method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classplot__qt_1_1_serial_plot_acff03652b20f67e2c6bacc9c344731f9}\label{classplot__qt_1_1_serial_plot_acff03652b20f67e2c6bacc9c344731f9} 
+{\bfseries ser}
+\item 
+\Hypertarget{classplot__qt_1_1_serial_plot_ab37f180e3787e9f8969a1f3b4722fac3}\label{classplot__qt_1_1_serial_plot_ab37f180e3787e9f8969a1f3b4722fac3} 
+{\bfseries press\+\_\+data}
+\item 
+\Hypertarget{classplot__qt_1_1_serial_plot_a921c4f49bc45f4aafa06059e0c8bf5f3}\label{classplot__qt_1_1_serial_plot_a921c4f49bc45f4aafa06059e0c8bf5f3} 
+{\bfseries temp\+\_\+data}
+\item 
+\Hypertarget{classplot__qt_1_1_serial_plot_ae9ff79ffa95e5f9da8feaef5c0a23c57}\label{classplot__qt_1_1_serial_plot_ae9ff79ffa95e5f9da8feaef5c0a23c57} 
+{\bfseries temp\+\_\+plot}
+\item 
+\Hypertarget{classplot__qt_1_1_serial_plot_a15dbb8ae8748215682bce916f4fe2b64}\label{classplot__qt_1_1_serial_plot_a15dbb8ae8748215682bce916f4fe2b64} 
+{\bfseries press\+\_\+plot}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classplot__qt_1_1_serial_plot_a82e40a2ca58d0077f63d783ac0da5e26}\label{classplot__qt_1_1_serial_plot_a82e40a2ca58d0077f63d783ac0da5e26} 
+\index{plot\_qt.SerialPlot@{plot\_qt.SerialPlot}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!plot\_qt.SerialPlot@{plot\_qt.SerialPlot}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily plot\+\_\+qt.\+Serial\+Plot.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+The constructor. 
+
+Connects to STM32 COM port and continuously plots the data received 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classplot__qt_1_1_serial_plot_a84b80c8e223f923604c155843c3f6893}\label{classplot__qt_1_1_serial_plot_a84b80c8e223f923604c155843c3f6893} 
+\index{plot\_qt.SerialPlot@{plot\_qt.SerialPlot}!append\_dataframes@{append\_dataframes}}
+\index{append\_dataframes@{append\_dataframes}!plot\_qt.SerialPlot@{plot\_qt.SerialPlot}}
+\doxysubsubsection{\texorpdfstring{append\_dataframes()}{append\_dataframes()}}
+{\footnotesize\ttfamily plot\+\_\+qt.\+Serial\+Plot.\+append\+\_\+dataframes (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Read sensor values and append to dataframes. 
+
+\begin{DoxyReturn}{Returns}
+Updated dataframes 
+\end{DoxyReturn}
+\Hypertarget{classplot__qt_1_1_serial_plot_ac1893aa898a8f040d82b1605756030bf}\label{classplot__qt_1_1_serial_plot_ac1893aa898a8f040d82b1605756030bf} 
+\index{plot\_qt.SerialPlot@{plot\_qt.SerialPlot}!connect\_port@{connect\_port}}
+\index{connect\_port@{connect\_port}!plot\_qt.SerialPlot@{plot\_qt.SerialPlot}}
+\doxysubsubsection{\texorpdfstring{connect\_port()}{connect\_port()}}
+{\footnotesize\ttfamily plot\+\_\+qt.\+Serial\+Plot.\+connect\+\_\+port (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Open port to which ST-\/\+Link is connected. 
+
+\begin{DoxyReturn}{Returns}
+COM port handle 
+\end{DoxyReturn}
+\Hypertarget{classplot__qt_1_1_serial_plot_a18f247ad65d2639f28e29578ae54fb14}\label{classplot__qt_1_1_serial_plot_a18f247ad65d2639f28e29578ae54fb14} 
+\index{plot\_qt.SerialPlot@{plot\_qt.SerialPlot}!detect\_port@{detect\_port}}
+\index{detect\_port@{detect\_port}!plot\_qt.SerialPlot@{plot\_qt.SerialPlot}}
+\doxysubsubsection{\texorpdfstring{detect\_port()}{detect\_port()}}
+{\footnotesize\ttfamily plot\+\_\+qt.\+Serial\+Plot.\+detect\+\_\+port (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Helper method. 
+
+Assumes OS is Windows and ST drivers are installed \begin{DoxyReturn}{Returns}
+Name of COM port where ST-\/\+Link is connected 
+\end{DoxyReturn}
+\Hypertarget{classplot__qt_1_1_serial_plot_a315d704f20b61f9d80a17c0f6079a000}\label{classplot__qt_1_1_serial_plot_a315d704f20b61f9d80a17c0f6079a000} 
+\index{plot\_qt.SerialPlot@{plot\_qt.SerialPlot}!get\_sensor\_values@{get\_sensor\_values}}
+\index{get\_sensor\_values@{get\_sensor\_values}!plot\_qt.SerialPlot@{plot\_qt.SerialPlot}}
+\doxysubsubsection{\texorpdfstring{get\_sensor\_values()}{get\_sensor\_values()}}
+{\footnotesize\ttfamily plot\+\_\+qt.\+Serial\+Plot.\+get\+\_\+sensor\+\_\+values (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Poll COM port for pressure and temperature values. 
+
+\begin{DoxyReturn}{Returns}
+Sensor readout values 
+\end{DoxyReturn}
+\Hypertarget{classplot__qt_1_1_serial_plot_a27893802d8b8ba830abf87d4cb18b5c9}\label{classplot__qt_1_1_serial_plot_a27893802d8b8ba830abf87d4cb18b5c9} 
+\index{plot\_qt.SerialPlot@{plot\_qt.SerialPlot}!initialize\_dataframes@{initialize\_dataframes}}
+\index{initialize\_dataframes@{initialize\_dataframes}!plot\_qt.SerialPlot@{plot\_qt.SerialPlot}}
+\doxysubsubsection{\texorpdfstring{initialize\_dataframes()}{initialize\_dataframes()}}
+{\footnotesize\ttfamily plot\+\_\+qt.\+Serial\+Plot.\+initialize\+\_\+dataframes (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Create new dataframes for storing sensor data. 
+
+\begin{DoxyReturn}{Returns}
+Initialized dataframes 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+plot\+\_\+qt.\+py\end{DoxyCompactItemize}
