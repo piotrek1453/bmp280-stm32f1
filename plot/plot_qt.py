@@ -2,10 +2,10 @@
 # Class for plotting data from BMP280 sensor received over UART
 
 
+import numpy as np
 import pyqtgraph as pg
 import serial
 from serial.tools import list_ports
-import numpy as np
 
 
 class SerialPlot:

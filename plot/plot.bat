@@ -1,0 +1,1 @@
+call venv\Scripts\activate && python plot_qt.py
