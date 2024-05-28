@@ -105,3 +105,4 @@ if __name__ == "__main__":
         target=plot_thread, args=()
     )  # Create new thread running SerialPlot() class
     plot.start()  # Start the thread
+    # Do something else
