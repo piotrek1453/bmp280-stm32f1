@@ -13,6 +13,8 @@
  * in the root directory of this software component.
  * If no LICENSE file comes with this software, it is provided AS-IS.
  *
+ * @file freertos.c
+ * @brief FreeRTOS setup and task function bodies.
  ******************************************************************************
  */
 /* USER CODE END Header */
@@ -145,9 +147,8 @@ void MX_FREERTOS_Init(void) {
 
 /* USER CODE BEGIN Header_vStatusTask */
 /**
- * @brief  Function implementing the statusTask thread.
- * @param  argument: Not used
- * @retval None
+ * @brief  Task that initializes and then periodically reads measurement
+ * values from BMP280 sensor.
  */
 /* USER CODE END Header_vStatusTask */
 void vStatusTask(void *argument) {
@@ -180,9 +181,7 @@ void vStatusTask(void *argument) {
 
 /* USER CODE BEGIN Header_vLedTask */
 /**
- * @brief Function implementing the ledTask thread.
- * @param argument: Not used
- * @retval None
+ * @brief Task that blinks LED to signal that the system is not frozen.
  */
 /* USER CODE END Header_vLedTask */
 void vLedTask(void *argument) {
