@@ -153,6 +153,16 @@ void MX_FREERTOS_Init(void) {
 void vStatusTask(void *argument) {
   /* USER CODE BEGIN vStatusTask */
   /* Infinite loop */
+  printf("System initializing\r\n");
+
+  BMP280_Init_I2C(BMP280_VAL_CTRL_MEAS_OSRS_T_16,
+                  BMP280_VAL_CTRL_MEAS_OSRS_P_16,
+                  BMP280_VAL_CTRL_MEAS_MODE_NORMAL,
+                  BMP280_VAL_CTRL_CONFIG_T_SB_0_5,
+                  BMP280_VAL_CTRL_CONFIG_FILTER_0,
+                  hi2c1,
+                  BMP280_DEVICE_ADDRESS_GND);
+
   while (true) {
     bmp280_result = BMP280_Measure_I2C(hi2c1, BMP280_DEVICE_ADDRESS_GND);
 

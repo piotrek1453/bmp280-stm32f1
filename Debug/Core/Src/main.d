@@ -35,7 +35,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h \
  ../Core/Inc/gpio.h ../Core/Inc/main.h ../Core/Inc/i2c.h \
- ../Core/Inc/usart.h ../Core/Inc/BMP280.h
+ ../Core/Inc/usart.h ../App/Inc/BMP280.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
@@ -76,4 +76,4 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/main.h:
 ../Core/Inc/i2c.h:
 ../Core/Inc/usart.h:
-../Core/Inc/BMP280.h:
+../App/Inc/BMP280.h:

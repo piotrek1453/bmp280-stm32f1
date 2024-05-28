@@ -1,0 +1,4 @@
+../App/Src/BMP280.c:37:6:BMP280_CalibrationConstantsRead_I2C	56	static
+../App/Src/BMP280.c:71:6:BMP280_Init_I2C	128	static
+../App/Src/BMP280.c:157:6:BMP280_Wake_I2C	48	static
+../App/Src/BMP280.c:196:22:BMP280_Measure_I2C	144	static

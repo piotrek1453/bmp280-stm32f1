@@ -92,15 +92,7 @@ int main(void) {
   MX_I2C1_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-  printf("System initializing\r\n");
 
-  BMP280_Init_I2C(BMP280_VAL_CTRL_MEAS_OSRS_T_16,
-                  BMP280_VAL_CTRL_MEAS_OSRS_P_16,
-                  BMP280_VAL_CTRL_MEAS_MODE_NORMAL,
-                  BMP280_VAL_CTRL_CONFIG_T_SB_0_5,
-                  BMP280_VAL_CTRL_CONFIG_FILTER_0,
-                  hi2c1,
-                  BMP280_DEVICE_ADDRESS_GND);
   /* USER CODE END 2 */
 
   /* Init scheduler */

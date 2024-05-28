@@ -1,4 +1,4 @@
-../Core/Src/freertos.c:153:6:vStatusTask	96	static
-../Core/Src/freertos.c:178:6:vLedTask	16	static
+../Core/Src/freertos.c:153:6:vStatusTask	112	static
+../Core/Src/freertos.c:188:6:vLedTask	16	static
 ../Core/Src/freertos.c:84:6:vApplicationIdleHook	0	static
 ../Core/Src/freertos.c:106:6:MX_FREERTOS_Init	8	static
