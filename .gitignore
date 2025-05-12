@@ -1,1 +1,7 @@
-plot/venv
+venv
+.vscode
+.settings
+__pycache__
+Debug/
+Release/
+*.launch

@@ -1,13 +1,14 @@
-### @package plot_qt
-# Class for plotting data from BMP280 sensor received over UART
-
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 import numpy as np
 import pyqtgraph as pg
 import serial
 from serial.tools import list_ports
+from termcolor import colored
 
-
+### @package plot_qt
+# Class for plotting data from BMP280 sensor received over UART
 class SerialPlot:
     ## @brief The constructor. Connects to STM32 COM port and continuously plots the data received
     def __init__(self):
@@ -26,11 +27,19 @@ class SerialPlot:
     @staticmethod
     def detect_port():
         stm32_serial = None
-        ports = serial.tools.list_ports.comports()
+        ports = list_ports.comports()
         for port, desc, hwid in sorted(ports):
-            if "STMicroelectronics STLink Virtual COM Port" in desc:
+            if "STLink" in desc:
                 stm32_serial = port
-            # print("{}: {} [{}]".format(port, desc, hwid))
+        if stm32_serial is None:
+            print(colored("STM32 Serial Port not found", "red"))
+            print(colored("Automatic port detection failed.", "blue"))
+            print(colored("Please select the port manually.", "blue"))
+            print(colored("Available ports:", "blue"))
+            for port, desc, hwid in sorted(ports):
+                print(colored(f"Port: {port} | Description: {desc} | HWID: {hwid}\n", "yellow"))
+            print("Example: COM3 (Windows) or /dev/ttyUSB0 (Unix-like)")
+            stm32_serial = input("Please enter the port name: ")
         return stm32_serial
 
     ## @brief Open port to which ST-Link is connected
@@ -55,11 +64,16 @@ class SerialPlot:
 
         while (temperature is None) or (pressure is None):
             raw_string = self.ser.readline().decode()
-
-            if "hPa" in raw_string:
-                pressure = float(raw_string.replace("hPa", ""))
-            elif "deg C" in raw_string:
-                temperature = float(raw_string.replace("deg C", ""))
+            try:
+                if "hPa" in raw_string:
+                    pressure = float(raw_string.replace("hPa", ""))
+                elif "deg C" in raw_string:
+                    temperature = float(raw_string.replace("deg C", ""))
+            except Exception as ex:
+                print(ex)
+                print("Error parsing data from sensor. Retrying...")
+                print(raw_string)
+                continue
         return pressure, temperature
 
     ## @brief Create new dataframes for storing sensor data

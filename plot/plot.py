@@ -1,6 +1,16 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# This script reads data from a serial port and plots temperature and pressure data.
+# It uses the PySerial library to handle serial communication and Matplotlib for plotting.
+# The script automatically detects the serial port for the STM32 device and reads data from it.
+# It expects the data to be in a specific format, with temperature and pressure values followed by their units.
+# The script collects the data in lists and plots them in a two-subplot figure.
+
 import matplotlib.pyplot as plt
 import serial
 from serial.tools import list_ports
+from termcolor import colored
 
 ports = serial.tools.list_ports.comports()
 STM32_serial = None
@@ -14,7 +24,16 @@ press_data = []
 for port, desc, hwid in sorted(ports):
     if "STMicroelectronics STLink Virtual COM Port" in desc:
         STM32_serial = port
-    print("{}: {} [{}]".format(port, desc, hwid))
+
+if STM32_serial is None:
+    print(colored("STM32 Serial Port not found", "red"))
+    print(colored("Automatic port detection failed.", "blue"))
+    print(colored("Please select the port manually.", "blue"))
+    print(colored("Available ports:", "blue"))
+    for port, desc, hwid in sorted(ports):
+        print(colored(f"Port: {port} | Description: {desc} | HWID: {hwid}\n", "yellow"))
+    print("Example: COM3 (Windows) or /dev/ttyUSB0 (Unix-like)")
+    STM32_serial = input("Please enter the port name: ")
 
 ser = serial.Serial(
     port=STM32_serial, baudrate=115200, stopbits=1, parity=serial.PARITY_NONE
